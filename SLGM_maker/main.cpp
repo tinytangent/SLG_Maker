@@ -1,10 +1,11 @@
 //See me fly
-#include <QtGui>
+#include <QApplication>
+#include <QMainWindow>
 int main(int argc,char* argv[])
 {
 	QApplication app(argc,argv);
 	//Fly....
-	QMainWindow mainWindow("LALALA");
+	QMainWindow mainWindow;
 	mainWindow.show();
 	return 0;
 }
