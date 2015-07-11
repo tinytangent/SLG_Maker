@@ -1,6 +1,9 @@
 #Qt Creator Config Files
 *.pro.user
 
+#currently don't upload examples ^_^
+examples/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
