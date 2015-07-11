@@ -3,14 +3,15 @@
 
 #include <QMap>
 #include <QPixmap>
+#include <QSoundEffect>
 
 class QString;
 class QPixmap;
-
+class QSoundEffect;
 /**
  * @brief PixmapPool类提供了一个图像缓存池，可以统一地加载位图并且通过一个字符串alias进行访问。
  */
-class PixmapPool
+class ResourceManager
 {
 public:
     /**
@@ -29,32 +30,42 @@ public:
      * @brief getInstance获取当前唯一的位图缓冲池的实例
      * @return 当前位图缓冲池的示例，如果该实例不存在，返回NULL
      */
-    static PixmapPool* getInstance();
+	static ResourceManager* getInstance();
 protected:
     /**
      * @brief nullPixmap是用于getPixmap在遇到错误的时候返回的空位图。
      */
     QPixmap nullPixmap;
 
+	/**
+	 * @brief nullAudio is used to return an empty QSoundEffect when get audio encounters error.
+	 */
+	QSoundEffect nullAudio;
+
     /**
      * @brief instance是一个保护的静态成员，是PixmapPool的唯一实例。
      */
-    static PixmapPool* instance;
+	static ResourceManager* instance;
 
     /**
      * @brief data用于存储字符串到对应位图的指针。
      */
-    QMap<QString,QPixmap*> data;
+	QMap<QString,QPixmap*> pixmapData;
+
+	/**
+	 * @brief audioData is used to store string to pointer of an audio.
+	 */
+	QMap<QString,QSoundEffect*> audioData;
 protected:
     /**
      * @brief PixmapPool是受到保护的构造函数，他什么都不做，被保护是为了实现单例模式。
      */
-    PixmapPool();
+	ResourceManager();
 
     /**
       * @brief PixmapPool类的析构函数，用于释放所有已经为Pixmap对象分配的内存。
       */
-    ~PixmapPool();
+	~ResourceManager();
 public:
     /**
      * @brief addPixmap 向位图缓冲池中添加一个位图
@@ -70,6 +81,10 @@ public:
      * @return 如果具有指定的别名的位图已被正确加载，则返回该位图，否则返回一个空的QPixmap对象（可以使用isNull判断）。
      */
     const QPixmap& getPixmap(const QString& alias) const;
+
+	bool addAudio(const QString& alias, const QString& fileName);
+
+	QSoundEffect& getAudio(const QString& alias);
 };
 
 #endif // PIXMAPPOOL_H

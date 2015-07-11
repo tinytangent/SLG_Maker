@@ -5,7 +5,7 @@
 #include <QString>
 #include <QMessageBox>
 #include "MagicTowerLoader.h"
-#include "PixmapPool.h"
+#include "ResourceManager.h"
 #include "script.h"
 
 MagicTowerLoader::MagicTowerLoader(MagicTowerScene *_scene)
@@ -25,7 +25,7 @@ void MagicTowerLoader::loadResource(const QString& resourcePath)
     {
         if(resourceList[i].isFile() && resourceList[i].suffix()=="png")
         {
-            if(!PixmapPool::getInstance()->addPixmap(resourceList[i].baseName(),resourceList[i].filePath()))
+            if(!ResourceManager::getInstance()->addPixmap(resourceList[i].baseName(),resourceList[i].filePath()))
             {
                 QMessageBox::critical(NULL,QString("警告"),
                                          QString("警告：存在未加载的资源文件。\n"
@@ -33,6 +33,14 @@ void MagicTowerLoader::loadResource(const QString& resourcePath)
                                                  "应用程序将继续，但如果这些资源在稍后被引用，可能造成其它错误信息。").arg(resourceList[i].filePath()));
             }
         }
+		else if(resourceList[i].isFile() && resourceList[i].suffix()=="wav")
+		{
+			if(!ResourceManager::getInstance()->addAudio(resourceList[i].baseName(),resourceList[i].filePath()))
+			{
+				QMessageBox::critical(NULL,QString("警告"),
+										 QString("Audio Load Fail %1").arg(resourceList[i].filePath()));
+			}
+		}
     }
 }
 
@@ -190,7 +198,7 @@ bool MagicTowerLoader::addPresetPassiveObject(const QMap<QString,QString>& param
     MagicTowerPassiveObject* object = new MagicTowerPassiveObject();
     if(parameters.find("pixmap")!=parameters.end())
     {
-        if(PixmapPool::getInstance()->getPixmap(parameters["pixmap"]).isNull())
+        if(ResourceManager::getInstance()->getPixmap(parameters["pixmap"]).isNull())
         {
             QMessageBox::critical(NULL,QString("警告"),
                                      QString("警告：预设%1试图引用未加载的资源文件。\n"
@@ -306,7 +314,7 @@ bool MagicTowerLoader::addPresetCharacter(const QMap<QString, QString> &paramete
         delete object;
         return false;
     }
-    if(PixmapPool::getInstance()->getPixmap(parameters["characterAnimation"]).isNull())
+    if(ResourceManager::getInstance()->getPixmap(parameters["characterAnimation"]).isNull())
     {
         QMessageBox::critical(NULL,QString("警告"),
                                  QString("警告：预设%1试图引用未加载的资源文件。\n"
@@ -337,7 +345,7 @@ bool MagicTowerLoader::addPresetCharacter(const QMap<QString, QString> &paramete
 
 void MagicTowerLoader::loadGame(const QString& gamePath)
 {
-    PixmapPool::init();
+    ResourceManager::init();
     loadResource(gamePath+"/res");
     loadPreset(gamePath + "/startup.mtpreset.ini");
 }
@@ -352,7 +360,7 @@ void MagicTowerLoader::unloadGame()
     }
     objectPreset.clear();
     scene->reset();
-    PixmapPool::release();
+    ResourceManager::release();
 }
 
 bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& saveName)

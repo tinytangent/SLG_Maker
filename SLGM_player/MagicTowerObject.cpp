@@ -1,7 +1,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include "MagicTowerObject.h"
-#include "PixmapPool.h"
+#include "ResourceManager.h"
 #include <QTimer>
 #include <QDebug>
 
@@ -58,7 +58,7 @@ void MagicTowerObject::setPixmap(QString _pixmapId)
     AnimationFrame frame;
     frame.x = frame.y = 0;
     frame.pixmapId = _pixmapId;
-    frame.pixmap = &PixmapPool::getInstance()->getPixmap(_pixmapId);
+    frame.pixmap = &ResourceManager::getInstance()->getPixmap(_pixmapId);
     animationData.append(frame);
     currentFrame = 0;
     update();
@@ -70,7 +70,7 @@ void MagicTowerObject::setTwoFrameAnimation(QString _pixmapId)
     AnimationFrame frame;
     frame.x = frame.y = 0;
     frame.pixmapId = _pixmapId;
-    frame.pixmap = &PixmapPool::getInstance()->getPixmap(_pixmapId);
+    frame.pixmap = &ResourceManager::getInstance()->getPixmap(_pixmapId);
     animationData.append(frame);
     frame.x = 32;
     animationData.append(frame);
@@ -83,7 +83,7 @@ void MagicTowerObject::setPixmapFrameAnimation(const QVector<AnimationFrame>& an
     animationData = animation;
     for(int i=0;i<animationData.size();i++)
     {
-        animationData[i].pixmap=&PixmapPool::getInstance()->getPixmap(animationData[i].pixmapId);
+        animationData[i].pixmap=&ResourceManager::getInstance()->getPixmap(animationData[i].pixmapId);
     }
     currentFrame = 0;
 }
