@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 release: DESTDIR = ../release
@@ -10,7 +10,6 @@ SOURCES += \
     main.cpp \
     MagicTowerScene.cpp \
     MagicTowerObject.cpp \
-    PixmapPool.cpp \
     MagicTowerCharacter.cpp \
     script.cpp \
     MagicTowerPassiveObject.cpp \
@@ -20,12 +19,12 @@ SOURCES += \
     CombatDialogExtension.cpp \
     NPCDialogExtension.cpp \
     SaveLoadExtension.cpp \
-    MagicTowerLoader.cpp
+    MagicTowerLoader.cpp \
+    ResourceManager.cpp
 
 HEADERS += \
     MagicTowerScene.h \
     MagicTowerObject.h \
-    PixmapPool.h \
     MagicTowerCharacter.h \
     script.h \
     MagicTowerPassiveObject.h \
@@ -35,4 +34,5 @@ HEADERS += \
     CombatDialogExtension.h \
     NPCDialogExtension.h \
     SaveLoadExtension.h \
-    MagicTowerLoader.h
+    MagicTowerLoader.h \
+    ResourceManager.h

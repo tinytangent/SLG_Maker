@@ -2,7 +2,7 @@
 #include "MagicTowerObject.h"
 #include "MagicTowerCharacter.h"
 #include "MagicTowerPassiveObject.h"
-#include "PixmapPool.h"
+#include "ResourceManager.h"
 #include "script.h"
 #include "CharacterPropertyExtension.h"
 #include "QGraphicsView"

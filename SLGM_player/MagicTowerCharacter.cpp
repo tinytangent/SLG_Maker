@@ -1,7 +1,7 @@
 #include "MagicTowerCharacter.h"
 #include "MagicTowerScene.h"
 #include "MagicTowerPassiveObject.h"
-#include "PixmapPool.h"
+#include "ResourceManager.h"
 #include "SaveLoadExtension.h"
 #include <QPropertyAnimation>
 #include <QKeyEvent>
@@ -103,7 +103,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
         {
             AnimationFrame frame;
             frame.pixmapId = characterAnimationSheet;
-            frame.pixmap = &PixmapPool::getInstance()->getPixmap(characterAnimationSheet);
+            frame.pixmap = &ResourceManager::getInstance()->getPixmap(characterAnimationSheet);
             frame.y = 32*i;
             frame.x = 32*j;
             directionAnimationData[i].append(frame);
@@ -111,7 +111,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
         directionSingleFrameData[i].clear();
         AnimationFrame frame;
         frame.pixmapId = characterAnimationSheet;
-        frame.pixmap = &PixmapPool::getInstance()->getPixmap(characterAnimationSheet);
+        frame.pixmap = &ResourceManager::getInstance()->getPixmap(characterAnimationSheet);
         frame.y = 32*i;
         frame.x = 0;
         directionSingleFrameData[i].append(frame);

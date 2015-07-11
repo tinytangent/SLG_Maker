@@ -4,7 +4,7 @@
 #include "MagicTowerScene.h"
 #include "MagicTowerCharacter.h"
 #include "MagicTowerObject.h"
-#include "PixmapPool.h"
+#include "ResourceManager.h"
 #include "MagicTowerPassiveObject.h"
 #include "CharacterPropertyExtension.h"
 #include "DialogExtension.h"
