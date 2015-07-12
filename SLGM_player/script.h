@@ -15,7 +15,8 @@
 #include "SaveLoadExtension.h"
 
 /**
- * @brief GeneralItemHandler类用于处理可以增加角色某一方面属性或减少角色某一方面属性的一类对象的事件
+ * @brief GeneralItemHandler is used to handle all Items that is used to increase or decrease some
+ * properties of a character.
  * （说起来有一点抽象，其实钥匙，血瓶，门，宝石都是这一类的物品）
  */
 class GeneralItemHandler : public MTPOEHandler
@@ -89,12 +90,15 @@ public:
         return true;
     }
 
+	
+	//Let's move ~
     virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         MagicTowerCharacter* character = scene->getActiveCharacter();
 		QString mapPrev = character->getMap();
 		QString mapNext = targetMap;
         if(character == NULL) return;
+		// Maybe we need some more music here?
         scene->setObjectAt(character, NULL, false);
         scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
