@@ -74,6 +74,8 @@ public:
      */
     MagicTowerObject* getObjectAt(const QString& layer, const int gridX, const int gridY);
 
+	QString backgroundMusic;
+
     /**
      * @brief setObjectAt设置某一位置的对象
      * @param layer图层名

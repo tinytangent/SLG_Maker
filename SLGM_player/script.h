@@ -92,11 +92,15 @@ public:
     virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         MagicTowerCharacter* character = scene->getActiveCharacter();
+		QString mapPrev = character->getMap();
+		QString mapNext = targetMap;
         if(character == NULL) return;
         scene->setObjectAt(character, NULL, false);
         scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
         scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
+		ResourceManager::getInstance()->getAudio(scene->getMap(mapPrev)->backgroundMusic).stop();
+		ResourceManager::getInstance()->getAudio(scene->getMap(mapNext)->backgroundMusic).play();
     }
     TransporterHandler(const QString& _targetMap, const QString& _targetLayer, int _targetX, int _targetY):
         targetMap(_targetMap),
