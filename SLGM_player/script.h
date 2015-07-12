@@ -15,7 +15,8 @@
 #include "SaveLoadExtension.h"
 
 /**
- * @brief GeneralItemHandler类用于处理可以增加角色某一方面属性或减少角色某一方面属性的一类对象的事件
+ * @brief GeneralItemHandler is used to handle all Items that is used to increase or decrease some
+ * properties of a character.
  * （说起来有一点抽象，其实钥匙，血瓶，门，宝石都是这一类的物品）
  */
 class GeneralItemHandler : public MTPOEHandler
