@@ -94,6 +94,7 @@ public:
     {
         MagicTowerCharacter* character = scene->getActiveCharacter();
         if(character == NULL) return;
+		// Maybe we need some more music here?
         scene->setObjectAt(character, NULL, false);
         scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
