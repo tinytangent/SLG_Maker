@@ -134,16 +134,16 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         map->addLayer("character",200);
         map->addLayer("main",100);
         map->addLayer("ground",0);
+		QString musicLine = mapFileStream.readLine();
+		map->backgroundMusic = musicLine.trimmed();
         for(int i=0;i<13;i++)
         {
-            qDebug()<<i;
             if(i==0||i==12)
             {
                 for(int j=0;j<13;j++)
                 {
                     MagicTowerObject* obj = new MagicTowerObject();
                     obj->setPixmap("ground");
-                    qDebug() << j;
                     scene->setObjectAt(mapName,"ground",j,i,obj);
 
                     obj = new MagicTowerPassiveObject();
