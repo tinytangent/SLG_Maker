@@ -93,7 +93,10 @@ public:
     virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         MagicTowerCharacter* character = scene->getActiveCharacter();
-        if(character == NULL) return;
+        if(character == NULL)
+		{
+			return;
+		}
 		// Maybe we need some more music here?
         scene->setObjectAt(character, NULL, false);
         scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
