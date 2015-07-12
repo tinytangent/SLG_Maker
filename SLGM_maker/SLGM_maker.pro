@@ -21,7 +21,8 @@ SOURCES += \
     ResourceManager.cpp \
     SaveLoadExtension.cpp \
     script.cpp \
-    SLGMObjectSelector.cpp
+    SLGMObjectSelector.cpp \
+    SLGMMainWindow.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -38,4 +39,8 @@ HEADERS += \
     ResourceManager.h \
     SaveLoadExtension.h \
     script.h \
-    SLGMObjectSelector.h
+    SLGMObjectSelector.h \
+    SLGMMainWindow.h
+
+FORMS += \
+    slgmmainwindow.ui

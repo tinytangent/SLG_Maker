@@ -4,9 +4,13 @@
 #include <QGraphicsScene>
 #include "MagicTowerScene.h"
 #include "MagicTowerObject.h"
+#include "SLGMMainWindow.h"
+
 int main(int argc,char* argv[])
 {
     QApplication app(argc,argv);
-    MagicTowerScene scene;
+	SLGMMainWindow mainWindow;
+	mainWindow.show();
+	//MagicTowerScene scene;
     return app.exec();
 }
