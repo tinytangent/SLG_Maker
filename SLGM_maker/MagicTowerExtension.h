@@ -2,7 +2,7 @@
 #define MAGICTOWEREXTENSION_H
 
 #include <QGraphicsObject>
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 class MagicTowerExtension : public QGraphicsObject
 {
     Q_OBJECT

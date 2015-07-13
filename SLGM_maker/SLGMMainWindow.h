@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QFileDialog>
 #include "ui_slgmmainwindow.h"
 
 class SLGMGameEditorWidget;
@@ -16,10 +17,15 @@ public:
 protected:
 	Ui::MainWindow ui;
 	SLGMGameEditorWidget* editorWidget;
+	QFileDialog fileDialog;
 signals:
 
 public slots:
 	void onActionNew();
+	void onActionOpen();
+	void onActionClose();
+	void onActionSave();
+	void onActionSaveAs();
 };
 
 #endif // SLGMMAINWINDOW_H

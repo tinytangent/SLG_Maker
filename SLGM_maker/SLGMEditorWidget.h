@@ -13,14 +13,14 @@ class SLGMGameEditorWidget : public QWidget
 protected:
 	Ui::Form ui;
 	MagicTowerScene* gameScene;
-	MagicTowerLoader loader;
+	MagicTowerLoader* loader;
 public:
 	explicit SLGMGameEditorWidget(QWidget *parent = 0);
 
 signals:
 
 public slots:
-	void loadGame();
+	void loadGame(const QString& filePath);
 	void unloadGame();
 };
 

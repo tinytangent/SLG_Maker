@@ -1,5 +1,5 @@
 #include "MagicTowerCharacter.h"
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 #include "MagicTowerPassiveObject.h"
 #include "ResourceManager.h"
 #include "SaveLoadExtension.h"

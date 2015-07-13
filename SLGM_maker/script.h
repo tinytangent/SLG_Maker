@@ -1,7 +1,7 @@
 #ifndef SCRIPT_H
 #define SCRIPT_H
 
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 #include "MagicTowerCharacter.h"
 #include "MagicTowerObject.h"
 #include "ResourceManager.h"

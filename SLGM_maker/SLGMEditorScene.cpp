@@ -1,4 +1,4 @@
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 #include "MagicTowerObject.h"
 #include "MagicTowerCharacter.h"
 #include "MagicTowerPassiveObject.h"
