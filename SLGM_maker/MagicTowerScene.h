@@ -164,15 +164,16 @@ public:
     template<class ExtType>
     bool addExtension(const QString& name)
     {
-        if(magicTowerExtensions.find(name)!=magicTowerExtensions.end()) return false;
-        magicTowerExtensions.insert(name, new ExtType(this));
-        return true;
+		//if(magicTowerExtensions.find(name)!=magicTowerExtensions.end()) return false;
+		//magicTowerExtensions.insert(name, new ExtType(this));
+		return false;
     }
 
     template<class ExtType>
     ExtType* getExtension(const QString& name)
     {
-        return dynamic_cast<ExtType*>(magicTowerExtensions[name]);
+		return NULL;
+		//return dynamic_cast<ExtType*>(magicTowerExtensions[name]);
     }
 
     /**

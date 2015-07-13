@@ -27,7 +27,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionOpen_Game_File"/>
+    <addaction name="actionNew"/>
     <addaction name="actionRemove_Game_File"/>
     <addaction name="action_Save"/>
     <addaction name="actionSave_As"/>
@@ -36,7 +36,7 @@
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOpen_Game_File">
+  <action name="actionNew">
    <property name="text">
     <string>&amp;New</string>
    </property>

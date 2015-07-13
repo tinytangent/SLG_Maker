@@ -22,7 +22,8 @@ SOURCES += \
     SaveLoadExtension.cpp \
     script.cpp \
     SLGMObjectSelector.cpp \
-    SLGMMainWindow.cpp
+    SLGMMainWindow.cpp \
+    SLGMGameEditorWidget.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -40,7 +41,9 @@ HEADERS += \
     SaveLoadExtension.h \
     script.h \
     SLGMObjectSelector.h \
-    SLGMMainWindow.h
+    SLGMMainWindow.h \
+    SLGMGameEditorWidget.h
 
 FORMS += \
-    slgmmainwindow.ui
+    slgmmainwindow.ui \
+    slgmgameeditorwidget.ui

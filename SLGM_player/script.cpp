@@ -7,5 +7,5 @@ void loadMap(MagicTowerScene* scene)
     scene->addExtension<CombatDialogExtension>("combatDialog");
     scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
     scene->addExtension<NPCDialogExtension>("npcDialog");
-    scene->addExtension<SaveLoadExtension>("saveLoad");
+	scene->addExtension<SaveLoadExtension>("saveLoad");
 }
