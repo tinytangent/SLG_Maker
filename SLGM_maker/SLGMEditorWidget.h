@@ -16,12 +16,13 @@ protected:
 	MagicTowerLoader* loader;
 public:
 	explicit SLGMGameEditorWidget(QWidget *parent = 0);
+	void loadGame(const QString& filePath);
+	void unloadGame();
 
 signals:
 
 public slots:
-	void loadGame(const QString& filePath);
-	void unloadGame();
+	void onMapSelectionChanged(const QString &newMap);
 };
 
 #endif // SLGMGAMEEDITORWIDGET_H

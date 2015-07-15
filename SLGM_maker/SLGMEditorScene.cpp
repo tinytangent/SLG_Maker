@@ -139,7 +139,6 @@ MagicTowerObject *MagicTowerScene::setObjectAt(const QString& map, const QString
         obj->map = map;
         addItem(obj);
     }
-    qDebug() << "ADDED";
     return getMap(map)->setObjectAt(layer,x,y,obj,release);
 }
 
