@@ -7,6 +7,8 @@
 #include "ui_slgmmainwindow.h"
 
 class SLGMGameEditorWidget;
+class QHBoxLayout;
+class SLGMObjectSelectorWidget;
 
 class SLGMMainWindow : public QMainWindow
 {
@@ -18,6 +20,8 @@ protected:
 	Ui::MainWindow ui;
 	SLGMGameEditorWidget* editorWidget;
 	QFileDialog fileDialog;
+	QHBoxLayout* mainLayout;
+	SLGMObjectSelectorWidget* objectSelectorWidget;
 signals:
 
 public slots:

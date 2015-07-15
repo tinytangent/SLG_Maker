@@ -1,8 +1,9 @@
 #include <QMessageBox>
-#include <QFileDialog>
+#include <QHBoxLayout>
 
 #include "SLGMMainWindow.h"
 #include "SLGMEditorWidget.h"
+#include "SLGMObjectSelectorWidget.h"
 
 SLGMMainWindow::SLGMMainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -12,8 +13,14 @@ SLGMMainWindow::SLGMMainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(ui.actionSave,SIGNAL(triggered()),this,SLOT(onActionSave()));
 	connect(ui.actionSaveAs,SIGNAL(triggered()),this,SLOT(onActionSaveAs()));
 	connect(ui.actionClose,SIGNAL(triggered()),this,SLOT(onActionClose()));
+	mainLayout = new QHBoxLayout();
 	editorWidget = new SLGMGameEditorWidget();
-	setCentralWidget(editorWidget);
+	mainLayout->addWidget(editorWidget);
+	objectSelectorWidget = new SLGMObjectSelectorWidget();
+	mainLayout->addWidget(objectSelectorWidget);
+	QWidget* temp = new QWidget();
+	temp->setLayout(mainLayout);
+	setCentralWidget(temp);
 }
 void SLGMMainWindow::onActionNew()
 {
