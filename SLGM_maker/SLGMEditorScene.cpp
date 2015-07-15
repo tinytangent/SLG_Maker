@@ -1,4 +1,4 @@
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 #include "MagicTowerObject.h"
 #include "MagicTowerCharacter.h"
 #include "MagicTowerPassiveObject.h"
@@ -99,7 +99,7 @@ MagicTowerMap::~MagicTowerMap()
 MagicTowerScene::MagicTowerScene(QObject* parent)
     :QGraphicsScene(parent)
 {
-    parentWidget = new QGraphicsView();
+	/*parentWidget = new QGraphicsView();
     parentWidget->setWindowTitle("魔塔");
     parentWidget->setScene(this);
     parentWidget->show();
@@ -107,14 +107,14 @@ MagicTowerScene::MagicTowerScene(QObject* parent)
     parentWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     parentWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	parentWidget->setMinimumSize((18+2)*32+2,
-                                 13*32+2);
-    activeCharacter = NULL;
+								 13*32+2);*/
+	/*activeCharacter = NULL;
 	SLGMObjectSelector* sel = new SLGMObjectSelector(NULL);
 
     loadMap(this);
 	sel->setPos(QPointF(0,0));
 	sel->setZValue(1e10);
-		addItem(sel);
+		addItem(sel);*/
 }
 
 bool MagicTowerScene::addMap(QString name, int width, int height)
@@ -139,7 +139,6 @@ MagicTowerObject *MagicTowerScene::setObjectAt(const QString& map, const QString
         obj->map = map;
         addItem(obj);
     }
-    qDebug() << "ADDED";
     return getMap(map)->setObjectAt(layer,x,y,obj,release);
 }
 

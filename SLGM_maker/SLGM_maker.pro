@@ -16,13 +16,14 @@ SOURCES += \
     MagicTowerLoader.cpp \
     MagicTowerObject.cpp \
     MagicTowerPassiveObject.cpp \
-    MagicTowerScene.cpp \
     NPCDialogExtension.cpp \
     ResourceManager.cpp \
     SaveLoadExtension.cpp \
     script.cpp \
     SLGMObjectSelector.cpp \
-    SLGMMainWindow.cpp
+    SLGMMainWindow.cpp \
+    SLGMEditorScene.cpp \
+    SLGMEditorWidget.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -34,13 +35,15 @@ HEADERS += \
     MagicTowerLoader.h \
     MagicTowerObject.h \
     MagicTowerPassiveObject.h \
-    MagicTowerScene.h \
     NPCDialogExtension.h \
     ResourceManager.h \
     SaveLoadExtension.h \
     script.h \
     SLGMObjectSelector.h \
-    SLGMMainWindow.h
+    SLGMMainWindow.h \
+    SLGMEditorScene.h \
+    SLGMEditorWidget.h
 
 FORMS += \
-    slgmmainwindow.ui
+    slgmmainwindow.ui \
+    slgmgameeditorwidget.ui

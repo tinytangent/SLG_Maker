@@ -8,7 +8,7 @@ SaveLoadExtension::SaveLoadExtension(MagicTowerScene* scene)
     :MagicTowerExtension(scene),loader(scene)
 {
     setZValue(-100);
-    saveLoadDialog = new QDialog(scene->getParentWidget());
+	saveLoadDialog = new QDialog(/*scene->getParentWidget()*/);
     saveLoadDialog->setMinimumSize(200,300);
     saveLoadDialog->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
     saveLoadDialog->open();

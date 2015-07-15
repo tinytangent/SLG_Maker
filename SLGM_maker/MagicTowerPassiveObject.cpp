@@ -1,5 +1,5 @@
 #include "MagicTowerPassiveObject.h"
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 
 MagicTowerPassiveObject::MagicTowerPassiveObject(QGraphicsItem* parent)
     :MagicTowerObject(parent)

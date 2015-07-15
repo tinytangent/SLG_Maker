@@ -2,7 +2,7 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-#include "MagicTowerScene.h"
+#include "SLGMEditorScene.h"
 #include "MagicTowerObject.h"
 #include "SLGMMainWindow.h"
 
