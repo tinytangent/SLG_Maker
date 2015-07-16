@@ -96,7 +96,7 @@ MagicTowerMap::~MagicTowerMap()
     reset();
 }
 
-SLGMEditorScene::SLGMEditorScene(QObject* parent)
+MagicTowerScene::MagicTowerScene(QObject* parent)
     :QGraphicsScene(parent)
 {
 	/*parentWidget = new QGraphicsView();
@@ -117,7 +117,7 @@ SLGMEditorScene::SLGMEditorScene(QObject* parent)
 		addItem(sel);*/
 }
 
-bool SLGMEditorScene::addMap(QString name, int width, int height)
+bool MagicTowerScene::addMap(QString name, int width, int height)
 {
     if(maps.find(name)!=maps.end()) return false;
     MagicTowerMap* map = new MagicTowerMap(width,height);
@@ -125,13 +125,13 @@ bool SLGMEditorScene::addMap(QString name, int width, int height)
     return true;
 }
 
-MagicTowerMap* SLGMEditorScene::getMap(const QString& name)
+MagicTowerMap* MagicTowerScene::getMap(const QString& name)
 {
     Q_ASSERT(maps.find(name)!=maps.end());
     return maps[name];
 }
 
-MagicTowerObject *SLGMEditorScene::setObjectAt(const QString& map, const QString& layer, int x, int y, MagicTowerObject* obj, bool release)
+MagicTowerObject *MagicTowerScene::setObjectAt(const QString& map, const QString& layer, int x, int y, MagicTowerObject* obj, bool release)
 {
     Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
     if(obj!=NULL)
@@ -142,18 +142,18 @@ MagicTowerObject *SLGMEditorScene::setObjectAt(const QString& map, const QString
     return getMap(map)->setObjectAt(layer,x,y,obj,release);
 }
 
-MagicTowerObject* SLGMEditorScene::setObjectAt(MagicTowerObject* oldObject, MagicTowerObject* newObject, bool release)
+MagicTowerObject* MagicTowerScene::setObjectAt(MagicTowerObject* oldObject, MagicTowerObject* newObject, bool release)
 {
     return setObjectAt(oldObject->map, oldObject->layer,oldObject->getGridX(),oldObject->getGridY(),newObject,release);
 }
 
-MagicTowerObject* SLGMEditorScene::getObjectAt(const QString& map, const QString& layer, int x, int y)
+MagicTowerObject* MagicTowerScene::getObjectAt(const QString& map, const QString& layer, int x, int y)
 {
     Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
     return getMap(map)->getObjectAt(layer,x,y);
 }
 
-bool SLGMEditorScene::setActiveCharacter(MagicTowerCharacter* _activeCharacter)
+bool MagicTowerScene::setActiveCharacter(MagicTowerCharacter* _activeCharacter)
 {
     activeCharacter = _activeCharacter;
     setActiveMap(activeCharacter->getMap());
@@ -161,7 +161,7 @@ bool SLGMEditorScene::setActiveCharacter(MagicTowerCharacter* _activeCharacter)
     return true;
 }
 
-bool SLGMEditorScene::setActiveMap(const QString& map)
+bool MagicTowerScene::setActiveMap(const QString& map)
 {
     if(map==activeMap) return true;
     if(activeMap!="")
@@ -173,12 +173,12 @@ bool SLGMEditorScene::setActiveMap(const QString& map)
     return true;
 }
 
-MagicTowerCharacter* SLGMEditorScene::getActiveCharacter()
+MagicTowerCharacter* MagicTowerScene::getActiveCharacter()
 {
     return activeCharacter;
 }
 
-void SLGMEditorScene::reset()
+void MagicTowerScene::reset()
 {
     activeCharacter = NULL;
     QMapIterator<QString, MagicTowerMap*> i(maps);
@@ -190,17 +190,17 @@ void SLGMEditorScene::reset()
     activeMap = "";
 }
 
-QGraphicsView* SLGMEditorScene::getParentWidget()
+QGraphicsView* MagicTowerScene::getParentWidget()
 {
     return parentWidget;
 }
 
-void SLGMEditorScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
+void MagicTowerScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
     Q_UNUSED(mouseEvent);
 }
 
-QList<QString> SLGMEditorScene::allMaps()
+QList<QString> MagicTowerScene::allMaps()
 {
     return maps.keys();
 }

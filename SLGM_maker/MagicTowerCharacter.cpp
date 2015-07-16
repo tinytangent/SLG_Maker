@@ -13,7 +13,7 @@ MagicTowerCharacter::MagicTowerCharacter()
 }
 void MagicTowerCharacter::keyPressEvent(QKeyEvent* event)
 {
-    SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
+    MagicTowerScene* scene = dynamic_cast<MagicTowerScene*>(this->scene());
     if(event->isAutoRepeat()) return;
     switch(event->key())
     {
@@ -122,7 +122,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
 
 void MagicTowerCharacter::beginMove()
 {
-    SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
+    MagicTowerScene* scene = dynamic_cast<MagicTowerScene*>(this->scene());
     MagicTowerMap* map = scene->getMap(this->map);
     int targetX,targetY,originX = gridX,originY = gridY;
     switch(moveDirection)
@@ -166,7 +166,7 @@ void MagicTowerCharacter::beginMove()
 
 void MagicTowerCharacter::finishMove()
 {
-    SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
+    MagicTowerScene* scene = dynamic_cast<MagicTowerScene*>(this->scene());
     MagicTowerMap* map = scene->getMap(this->map);
     MagicTowerPassiveObject* originalObject = dynamic_cast<MagicTowerPassiveObject*>(map->getObjectAt("main",gridX,gridY));
     if(originalObject!=NULL) originalObject->onMoveToHandler();

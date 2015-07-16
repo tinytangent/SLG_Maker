@@ -109,7 +109,7 @@ protected:
     int selectedOption;
 public:
     //构造函数
-    explicit NPCDialogExtension(SLGMEditorScene* scene);
+    explicit NPCDialogExtension(MagicTowerScene* scene);
 
     //启动NPC对话框
     virtual void beginDialog(NPCDialogData &_dialogPages);

@@ -7,10 +7,10 @@ class MagicTowerExtension : public QGraphicsObject
 {
     Q_OBJECT
 protected:
-    SLGMEditorScene* magicTowerScene;
+    MagicTowerScene* magicTowerScene;
 public:
     //构造函数，将扩展对象与场景相关联。
-    explicit MagicTowerExtension(SLGMEditorScene* scene);
+    explicit MagicTowerExtension(MagicTowerScene* scene);
 
     //简单实现QGraphicsObject类的两个纯虚函数
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
