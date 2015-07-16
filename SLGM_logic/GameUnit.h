@@ -6,6 +6,7 @@
 #include "GameEvent.h"
 #include "GameBase.h"
 #include "GameLayerSquare.h"
+#include "lua.hpp"
 
 using namespace std;
 
@@ -21,6 +22,7 @@ private:
 	GameLayerSquare* parent;
 public:
 	GameUnit();
+	GameUnit(string _UnitName, int x, int y);
 	GameUnit(GameLayerSquare* _parent);
 	~GameUnit();
 
@@ -34,7 +36,7 @@ public:
 	* @return 0:设置成功 1:设置失败
 	*/
 	int SetParent(GameLayerSquare* _parent);
-}
+};
 
 
 
