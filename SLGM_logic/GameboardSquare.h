@@ -16,12 +16,12 @@ Description:实现了GameBoardSquare类。
 #include <string>
 #include <map>
 #include "GameBase.h"
+#include "GameLayerSquare.h"
 #include "GameEvent.h"
+#include "Game.h"
 
 using namespace std;
 
-class GameLayerSquare;
-class Game;
 /*
 * @brief
 * GameBoardSquare类是逻辑部分的组成模块，它负责实现并储存正方形格棋盘。
@@ -91,7 +91,7 @@ public:
 	* @return 0: 1:没有该名称的层指向要查询的层的指针
 	*/
 	int QueryLayer(string sLayerName, GameLayerSquare* result);
-
+	
 	/*
 	* @brief 设置父对象
 	* @param _parent:要设置为父对象的指针

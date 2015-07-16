@@ -1,5 +1,4 @@
 #include "GameUnit.h"
-#include "GameLayerSquare.h"
 
 using namespace std;
 

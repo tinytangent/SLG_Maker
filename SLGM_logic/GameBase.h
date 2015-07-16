@@ -1,12 +1,11 @@
-#ifndef _GAMEBASE_H_
-#define _GAMEBASE_H_
+#ifndef _GAME_H_
+#define _GAME_H
 
 #include <string>
 #include <map>
+#include "GameEvent.h"
 
 using namespace std;
-
-class GameEvent;
 
 /*
 * @brief

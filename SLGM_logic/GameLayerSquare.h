@@ -6,10 +6,9 @@
 #include "GameUnit.h"
 #include "GameEvent.h"
 #include "GameBase.h"
+#include "GameBoardSquare.h"
 
 using namespace std;
-
-class GameBoardSquare;
 
 class GameLayerSquare : public GameBase
 {
@@ -78,7 +77,7 @@ public:
 	* @return 0:成功拓展 1:新层的大小比原有大小还要大 2:由于nAnchorX或nAnchorY过大导致原层一部分/全部超出新层范围
 	*/
 	int ShrinkLayer(int nNewSizeX, int nNewSizeY, int nAnchorX = 0, int nAnchorY = 0);
-};
+}
 
 
 #endif
