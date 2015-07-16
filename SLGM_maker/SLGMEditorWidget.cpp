@@ -2,17 +2,17 @@
 #include "SLGMEditorScene.h"
 #include "MagicTowerCharacter.h"
 
-SLGMGameEditorWidget::SLGMGameEditorWidget(QWidget *parent)
+SLGMEditorWidget::SLGMEditorWidget(QWidget *parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	gameScene = new MagicTowerScene();
+	gameScene = new SLGMEditorScene();
 	loader = new MagicTowerLoader(this->gameScene);
 	ui.graphicsView->setScene(gameScene);
 	connect(ui.comboBoxMaps,SIGNAL(currentTextChanged(QString)),this,SLOT(onMapSelectionChanged(QString)));
 }
 
-void SLGMGameEditorWidget::loadGame(const QString &filePath)
+void SLGMEditorWidget::loadGame(const QString &filePath)
 {
 	loader->loadGame(filePath);
 	loader->loadMap(filePath + "/startup.mtmap.ini");
@@ -25,12 +25,12 @@ void SLGMGameEditorWidget::loadGame(const QString &filePath)
 	}
 }
 
-void SLGMGameEditorWidget::unloadGame()
+void SLGMEditorWidget::unloadGame()
 {
 
 }
 
-void SLGMGameEditorWidget::onMapSelectionChanged(const QString& newMap)
+void SLGMEditorWidget::onMapSelectionChanged(const QString& newMap)
 {
 	gameScene->setActiveMap(newMap);
 }

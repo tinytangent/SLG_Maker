@@ -1,6 +1,6 @@
 #include "script.h"
 #include <QFileDialog>
-void loadMap(MagicTowerScene* scene)
+void loadMap(SLGMEditorScene* scene)
 {
 	/*scene->addExtension<CharacterPropertyExtension>("characterProperty");
     scene->addExtension<DialogExtension>("dialog");

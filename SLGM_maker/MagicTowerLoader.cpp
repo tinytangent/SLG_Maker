@@ -8,7 +8,7 @@
 #include "ResourceManager.h"
 #include "script.h"
 
-MagicTowerLoader::MagicTowerLoader(MagicTowerScene *_scene)
+MagicTowerLoader::MagicTowerLoader(SLGMEditorScene *_scene)
 {
     this->scene = _scene;
 }
@@ -479,4 +479,9 @@ void MagicTowerLoader::loadSavedGame(const QString& directoryName, const QString
         if(extraFileStream.atEnd()) break;
     }
     extraFile.close();
+}
+
+QMap<QString, QObject*>& MagicTowerLoader::allPresets()
+{
+	return objectPreset;
 }

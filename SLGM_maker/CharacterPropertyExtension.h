@@ -12,7 +12,7 @@ protected:
 public:
 
     //构造函数
-    explicit CharacterPropertyExtension(MagicTowerScene* scene);
+    explicit CharacterPropertyExtension(SLGMEditorScene* scene);
 
     //完成绘制
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);

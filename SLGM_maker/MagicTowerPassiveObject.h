@@ -15,14 +15,14 @@ public:
      * @param obj 触发事件的对象
      * @return 是否允许角色移动
      */
-    virtual bool onAttemptMoveHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj) = 0;
+    virtual bool onAttemptMoveHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj) = 0;
 
     /**
      * @brief onAttemptMoveHandler适用于处理试图角色已经移动到物体的事件处理器
      * @param scene发生事件的的场景
      * @param obj 触发事件的对象
      */
-    virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj) = 0;
+    virtual void onMoveToHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj) = 0;
 };
 
 typedef MagicTowerPassiveObjectEventHandler MTPOEHandler;
