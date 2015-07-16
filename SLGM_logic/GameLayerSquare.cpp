@@ -36,7 +36,7 @@ int GameLayerSquare::AddUnit(GameUnit* newUnit)
 * @param nId:要删除的单位的id; bDestroy:是否同时从内存中删除
 * @return 0:成功删除;
 */
-int GameLayerSquare::DeleteUnit(int nId, bool bDestroy = true)
+int GameLayerSquare::DeleteUnit(int nId, bool bDestroy)
 {
 	if (bDestroy)
 		delete unit[nId];
@@ -75,7 +75,7 @@ int GameLayerSquare::SetParent(GameBoardSquare* _parent)
 * @param nNewSizeX,nNewSizeY:新层的大小 nAnchorX,nAnchorY:原坐标(0,0)在新层上的坐标
 * @return 0:成功拓展 1:新层的大小比原有大小还要小 2:由于nAnchorX或nAnchorY过大导致原层一部分/全部超出新层范围
 */
-int GameLayerSquare::ExpandLayer(int nNewSizeX, int nNewSizeY, int nAnchorX = 0, int nAnchorY = 0)
+int GameLayerSquare::ExpandLayer(int nNewSizeX, int nNewSizeY, int nAnchorX, int nAnchorY)
 {
 	if (nNewSizeX < nSizeX || nNewSizeY < nSizeY)
 		return 1;
@@ -92,7 +92,7 @@ int GameLayerSquare::ExpandLayer(int nNewSizeX, int nNewSizeY, int nAnchorX = 0,
 * @param nNewSizeX,nNewSizeY:新层的大小 nAnchorX,nAnchorY:新层上的坐标(0,0)在原层的坐标
 * @return 0:成功拓展 1:新层的大小比原有大小还要大 2:由于nAnchorX或nAnchorY过大导致新层一部分/全部超出原层范围
 */
-int GameLayerSquare::ShrinkLayer(int nNewSizeX, int nNewSizeY, int nAnchorX = 0, int nAnchorY = 0)
+int GameLayerSquare::ShrinkLayer(int nNewSizeX, int nNewSizeY, int nAnchorX, int nAnchorY)
 {
 	if (nNewSizeX > nSizeX || nNewSizeY > nSizeY)
 		return 1;

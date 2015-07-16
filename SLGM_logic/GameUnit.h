@@ -5,10 +5,10 @@
 #include <map>
 #include "GameEvent.h"
 #include "GameBase.h"
-#include "GameLayerSquare.h"
 
 using namespace std;
 
+class GameLayerSquare;
 class GameUnit : public GameBase
 {
 	struct Pos
@@ -34,7 +34,7 @@ public:
 	* @return 0:设置成功 1:设置失败
 	*/
 	int SetParent(GameLayerSquare* _parent);
-}
+};
 
 
 
