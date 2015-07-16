@@ -7,6 +7,6 @@
 int main(int argc,char* argv[])
 {
     QApplication app(argc,argv);
-    MagicTowerScene scene;
+    SLGMEditorScene scene;
     return app.exec();
 }

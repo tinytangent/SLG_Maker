@@ -6,7 +6,8 @@
 #include <QFileDialog>
 #include "ui_slgmmainwindow.h"
 
-class SLGMGameEditorWidget;
+class SLGMEditorWidget;
+class SLGMEditorScene;
 class QHBoxLayout;
 class SLGMObjectSelectorWidget;
 
@@ -15,10 +16,12 @@ class SLGMMainWindow : public QMainWindow
 	Q_OBJECT
 public:
 	explicit SLGMMainWindow(QWidget *parent = 0);
+	SLGMEditorWidget* getEditorWidget();
+	SLGMEditorScene* getEditorScene();
 
 protected:
 	Ui::MainWindow ui;
-	SLGMGameEditorWidget* editorWidget;
+	SLGMEditorWidget* editorWidget;
 	QFileDialog fileDialog;
 	QHBoxLayout* mainLayout;
 	SLGMObjectSelectorWidget* objectSelectorWidget;

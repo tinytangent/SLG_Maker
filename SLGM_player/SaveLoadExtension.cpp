@@ -4,7 +4,7 @@
 #include "NPCDialogExtension.h"
 #include "CombatDialogExtension.h"
 #include "CharacterPropertyExtension.h"
-SaveLoadExtension::SaveLoadExtension(MagicTowerScene* scene)
+SaveLoadExtension::SaveLoadExtension(SLGMEditorScene* scene)
     :MagicTowerExtension(scene),loader(scene)
 {
     setZValue(-100);

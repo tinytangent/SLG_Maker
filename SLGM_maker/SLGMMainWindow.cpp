@@ -14,14 +14,25 @@ SLGMMainWindow::SLGMMainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(ui.actionSaveAs,SIGNAL(triggered()),this,SLOT(onActionSaveAs()));
 	connect(ui.actionClose,SIGNAL(triggered()),this,SLOT(onActionClose()));
 	mainLayout = new QHBoxLayout();
-	editorWidget = new SLGMGameEditorWidget();
+	editorWidget = new SLGMEditorWidget();
 	mainLayout->addWidget(editorWidget);
-	objectSelectorWidget = new SLGMObjectSelectorWidget();
+	objectSelectorWidget = new SLGMObjectSelectorWidget(this);
 	mainLayout->addWidget(objectSelectorWidget);
 	QWidget* temp = new QWidget();
 	temp->setLayout(mainLayout);
 	setCentralWidget(temp);
 }
+
+SLGMEditorWidget* SLGMMainWindow::getEditorWidget()
+{
+	return this->editorWidget;
+}
+
+SLGMEditorScene* SLGMMainWindow::getEditorScene()
+{
+	return this->editorWidget->gameScene;
+}
+
 void SLGMMainWindow::onActionNew()
 {
 }
@@ -40,6 +51,7 @@ void SLGMMainWindow::onActionOpen()
 			editorWidget->loadGame(info.path());
 		}
 	}
+	objectSelectorWidget->updateObjectList();
 }
 
 void SLGMMainWindow::onActionClose()

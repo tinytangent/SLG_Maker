@@ -4,14 +4,19 @@
 #include <QWidget>
 #include "ui_slgmobjectselectorwidget.h"
 
+class SLGMMainWindow;
+class QStandardItemModel;
+
 class SLGMObjectSelectorWidget : public QWidget
 {
 	Q_OBJECT
 protected:
+	SLGMMainWindow* mainWindow;
 	Ui::ObjectSelector ui;
+	QStandardItemModel* objectListModel;
 public:
-	explicit SLGMObjectSelectorWidget(QWidget *parent = 0);
-
+	explicit SLGMObjectSelectorWidget(SLGMMainWindow* _mainWindow);
+	void updateObjectList();
 signals:
 
 public slots:

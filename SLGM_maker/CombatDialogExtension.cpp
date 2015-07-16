@@ -7,7 +7,7 @@
 #include "CharacterPropertyExtension.h"
 #include "SaveLoadExtension.h"
 
-CombatDialogExtension::CombatDialogExtension(MagicTowerScene* scene) :
+CombatDialogExtension::CombatDialogExtension(SLGMEditorScene* scene) :
     DialogExtension(scene)
 {
     fightTimer = new QTimer();

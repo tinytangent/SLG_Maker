@@ -18,7 +18,7 @@ protected:
 public:
 
     //构造函数
-    explicit DialogExtension(MagicTowerScene* scene);
+    explicit DialogExtension(SLGMEditorScene* scene);
 
     //绘图函数
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
