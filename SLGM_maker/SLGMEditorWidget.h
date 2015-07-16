@@ -5,17 +5,17 @@
 #include "ui_slgmgameeditorwidget.h"
 #include "MagicTowerLoader.h"
 
-class MagicTowerScene;
+class SLGMEditorScene;
 
-class SLGMGameEditorWidget : public QWidget
+class SLGMEditorWidget : public QWidget
 {
 	Q_OBJECT
 protected:
 	Ui::Form ui;
-	MagicTowerScene* gameScene;
-	MagicTowerLoader* loader;
 public:
-	explicit SLGMGameEditorWidget(QWidget *parent = 0);
+	MagicTowerLoader* loader;
+	SLGMEditorScene* gameScene;
+	explicit SLGMEditorWidget(QWidget *parent = 0);
 	void loadGame(const QString& filePath);
 	void unloadGame();
 

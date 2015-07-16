@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QTextCodec>
 
-CharacterPropertyExtension::CharacterPropertyExtension(MagicTowerScene * scene)
+CharacterPropertyExtension::CharacterPropertyExtension(SLGMEditorScene * scene)
     :MagicTowerExtension(scene)
     ,textFont("黑体", 18)
 {

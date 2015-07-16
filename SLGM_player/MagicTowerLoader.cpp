@@ -8,7 +8,7 @@
 #include "ResourceManager.h"
 #include "script.h"
 
-MagicTowerLoader::MagicTowerLoader(MagicTowerScene *_scene)
+MagicTowerLoader::MagicTowerLoader(SLGMEditorScene *_scene)
 {
     this->scene = _scene;
 }

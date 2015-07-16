@@ -44,7 +44,7 @@ protected:
     QPushButton* buttonExit;
 public:
     //构造函数
-    explicit SaveLoadExtension(MagicTowerScene* scene);
+    explicit SaveLoadExtension(SLGMEditorScene* scene);
 
     //激活暂停对话框
     void active();

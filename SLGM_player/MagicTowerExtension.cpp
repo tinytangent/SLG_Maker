@@ -1,6 +1,6 @@
 #include "MagicTowerExtension.h"
 
-MagicTowerExtension::MagicTowerExtension(MagicTowerScene *_scene)
+MagicTowerExtension::MagicTowerExtension(SLGMEditorScene *_scene)
 {
     this->magicTowerScene = _scene;
     magicTowerScene->addItem(this);

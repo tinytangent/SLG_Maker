@@ -6,7 +6,7 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 
-NPCDialogExtension::NPCDialogExtension(MagicTowerScene *scene) :
+NPCDialogExtension::NPCDialogExtension(SLGMEditorScene *scene) :
     DialogExtension(scene)
 {
     dialogPages = NULL;

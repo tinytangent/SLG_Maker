@@ -4,14 +4,14 @@
 #include <QMap>
 #include <QDebug>
 
-class MagicTowerScene;
+class SLGMEditorScene;
 class QString;
 
 class MagicTowerLoader
 {
 protected:
     //与加载器关联的场景对象
-    MagicTowerScene* scene;
+    SLGMEditorScene* scene;
 
     //加载的对象预设表
     QMap<QString, QObject*> objectPreset;
@@ -20,7 +20,7 @@ public:
      * @brief 构造一个魔塔加载器对象，在构造时需要指定与该加载器关联的游戏场景对象。
      * @param _scene 与加载器关联的场景对象的指针
      */
-    MagicTowerLoader(MagicTowerScene* _scene);
+    MagicTowerLoader(SLGMEditorScene* _scene);
 
     /**
      * @brief loadResource用于从一个文件夹加载游戏的图片资源文件，该文件夹中所有具有.png扩展名的文件都会被加载到PixmapPool之中
@@ -79,6 +79,7 @@ public:
         return (T*)(objectPreset[presetName]);
     }
 
+	QMap<QString, QObject*>& allPresets();
     //析构函数，用于释放资源。
     ~MagicTowerLoader();
 };
