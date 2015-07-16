@@ -88,7 +88,7 @@ public:
     MagicTowerObject* setObjectAt(const QString& layer, const int gridX, const int gridY, MagicTowerObject* object, bool release = true);
 };
 
-class SLGMEditorScene : public QGraphicsScene
+class MagicTowerScene : public QGraphicsScene
 {
 protected:
 
@@ -192,7 +192,7 @@ protected:
     //鼠标移动事件，用于覆盖基类避免焦点对象被意外改变
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
 public:
-    SLGMEditorScene(QObject* parent = 0);
+	MagicTowerScene(QObject* parent = 0);
 };
 
 #endif // MAGICTOWERSCENE_H
