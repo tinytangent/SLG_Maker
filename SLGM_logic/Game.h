@@ -1,13 +1,14 @@
 #ifndef _GAME_H_
-#define _GAME_H
+#define _GAME_H_
 
 #include <string>
 #include <map>
-#include "GameBoardSquare.h"
 #include "GameEvent.h"
 #include "GameBase.h"
 
 using namespace std;
+
+class GameBoardSquare;
 
 /*
 * @brief

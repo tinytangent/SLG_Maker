@@ -8,6 +8,11 @@ GameUnit::GameUnit()
 {
 }
 
+GameUnit::GameUnit(string _UnitName, int x, int y)
+{
+	//todo
+}
+
 GameUnit::GameUnit(GameLayerSquare* _parent)
 {
 	parent = _parent;

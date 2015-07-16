@@ -1,3 +1,4 @@
+#include "GameLayerSquare.h"
 #include "GameBoardSquare.h"
 
 
@@ -49,7 +50,7 @@ int GameBoardSquare::AddLayer(string sLayerName, GameLayerSquare* gameLayer)
 * @param sLayerName:要删除的层的名称; bDestroy:是否同时从内存中删除
 * @return 0:成功删除 1:拥有该名称的层不存在
 */
-int GameBoardSquare::DeleteLayer(string sLayerName, bool bDestroy = true)
+int GameBoardSquare::DeleteLayer(string sLayerName, bool bDestroy)
 {
 	if (layer.count(sLayerName) == 0)
 		return 1;
@@ -66,7 +67,7 @@ int GameBoardSquare::DeleteLayer(string sLayerName, bool bDestroy = true)
 * @param nNewSizeX,nNewSizeY:新棋盘的大小 nAnchorX,nAnchorY:原坐标(0,0)在新棋盘上的坐标
 * @return 0:成功拓展 1:新棋盘的大小比原有大小还要小 2:由于nAnchorX或nAnchorY过大导致原棋盘一部分/全部超出新棋盘范围
 */
-int GameBoardSquare::ExpandBoard(int nNewSizeX, int nNewSizeY, int nAnchorX = 0, int nAnchorY = 0)
+int GameBoardSquare::ExpandBoard(int nNewSizeX, int nNewSizeY, int nAnchorX, int nAnchorY)
 {
 	map<string,GameLayerSquare*>::iterator it;
 	for (it = layer.begin(); it != layer.end(); it++)
@@ -81,7 +82,7 @@ int GameBoardSquare::ExpandBoard(int nNewSizeX, int nNewSizeY, int nAnchorX = 0,
 * @param nNewSizeX,nNewSizeY:新棋盘的大小 nAnchorX,nAnchorY:新棋盘(0,0)在原棋盘上的坐标
 * @return 0:成功拓展 1:新棋盘的大小比原有大小还要大 2:由于nAnchorX或nAnchorY过大导致新棋盘一部分/全部超出原棋盘范围
 */
-int GameBoardSquare::ShrinkBoard(int nNewSizeX, int nNewSizeY, int nAnchorX = 0, int nAnchorY = 0)
+int GameBoardSquare::ShrinkBoard(int nNewSizeX, int nNewSizeY, int nAnchorX, int nAnchorY)
 {
 	map<string,GameLayerSquare*>::iterator it;
 	for (it = layer.begin(); it != layer.end(); it++)

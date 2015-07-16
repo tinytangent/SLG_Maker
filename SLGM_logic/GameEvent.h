@@ -1,11 +1,9 @@
 #ifndef _GAME_EVENT_H_
 #define _GAME_EVENT_H_
 
-#include "GameBase.h"
-
 using namespace std;
 
-class GameEvent : public GameBase
+class GameEvent
 {
 	enum TriggerType {};
 	
