@@ -9,7 +9,7 @@ MagicTowerPassiveObject::MagicTowerPassiveObject(QGraphicsItem* parent)
 
 bool MagicTowerPassiveObject::onAttemptMoveHandler()
 {
-    SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
+    MagicTowerScene* scene = dynamic_cast<MagicTowerScene*>(this->scene());
     if(handler!=NULL)
     {
         return handler->onAttemptMoveHandler(scene, this);
@@ -33,7 +33,7 @@ MagicTowerObject* MagicTowerPassiveObject::clone()
 
 void MagicTowerPassiveObject::onMoveToHandler()
 {
-    SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
+    MagicTowerScene* scene = dynamic_cast<MagicTowerScene*>(this->scene());
     if(handler!=NULL)
     {
         handler->onMoveToHandler(scene, this);

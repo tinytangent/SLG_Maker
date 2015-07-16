@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 
-DialogExtension::DialogExtension(SLGMEditorScene* scene) :
+DialogExtension::DialogExtension(MagicTowerScene* scene) :
     MagicTowerExtension(scene)
     ,dialogBrush(QColor(0,0,0,192))
     ,dialogPen(QColor(64,64,64,192))

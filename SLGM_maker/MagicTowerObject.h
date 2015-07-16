@@ -6,7 +6,7 @@
 #include <QVector>
 
 
-class SLGMEditorScene;
+class MagicTowerScene;
 class MagicTowerMap;
 
 /**
@@ -39,7 +39,7 @@ public:
 class MagicTowerObject : public QGraphicsObject
 {
     friend class MagicTowerMap;
-    friend class SLGMEditorScene;
+    friend class MagicTowerScene;
 
     Q_OBJECT
 protected:

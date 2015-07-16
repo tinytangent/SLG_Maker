@@ -23,8 +23,7 @@ SOURCES += \
     SLGMObjectSelector.cpp \
     SLGMMainWindow.cpp \
     SLGMEditorScene.cpp \
-    SLGMEditorWidget.cpp \
-    SLGMObjectSelectorWidget.cpp
+    SLGMEditorWidget.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -43,10 +42,8 @@ HEADERS += \
     SLGMObjectSelector.h \
     SLGMMainWindow.h \
     SLGMEditorScene.h \
-    SLGMEditorWidget.h \
-    SLGMObjectSelectorWidget.h
+    SLGMEditorWidget.h
 
 FORMS += \
     slgmmainwindow.ui \
-    slgmgameeditorwidget.ui \
-    slgmobjectselectorwidget.ui
+    slgmgameeditorwidget.ui

@@ -22,7 +22,7 @@ protected:
     int nextFighter;
 public:
     //构造函数
-    explicit CombatDialogExtension(SLGMEditorScene* scene);
+    explicit CombatDialogExtension(MagicTowerScene* scene);
 
     //指定角色和怪物，并开启战斗
     virtual void beginFight(MagicTowerCharacter* _character, MagicTowerPassiveObject* _monster);

@@ -26,7 +26,7 @@ protected:
 public:
     QString appliedGameProperty;
     int appliedPropertyDelta;
-    virtual bool onAttemptMoveHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual bool onAttemptMoveHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         MagicTowerCharacter* currentCharacter = scene->getActiveCharacter();
         if(currentCharacter!=NULL)
@@ -41,7 +41,7 @@ public:
         return false;
     }
 
-    virtual void onMoveToHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
 
     }
@@ -62,13 +62,13 @@ class MonsterHandler : public MTPOEHandler
 public:
     QString appliedGameProperty;
     int appliedPropertyDelta;
-    virtual bool onAttemptMoveHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual bool onAttemptMoveHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         scene->getExtension<CombatDialogExtension>("combatDialog")->beginFight(scene->getActiveCharacter(),obj);
         return false;
     }
 
-    virtual void onMoveToHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
     }
 };
@@ -83,7 +83,7 @@ public:
     QString targetLayer;
     int targetX;
     int targetY;
-    virtual bool onAttemptMoveHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual bool onAttemptMoveHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         Q_UNUSED(scene);
         Q_UNUSED(obj);
@@ -92,7 +92,7 @@ public:
 
 	
 	//Let's move ~
-    virtual void onMoveToHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         MagicTowerCharacter* character = scene->getActiveCharacter();
 		QString mapPrev = character->getMap();
@@ -128,7 +128,7 @@ public:
         data = &_data;
     }
 
-    virtual bool onAttemptMoveHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual bool onAttemptMoveHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         Q_UNUSED(scene);
         Q_UNUSED(obj);
@@ -136,13 +136,13 @@ public:
         return false;
     }
 
-    virtual void onMoveToHandler(SLGMEditorScene* scene, MagicTowerPassiveObject* obj)
+    virtual void onMoveToHandler(MagicTowerScene* scene, MagicTowerPassiveObject* obj)
     {
         Q_UNUSED(scene);
         Q_UNUSED(obj);
     }
 };
 
-void loadMap(SLGMEditorScene* scene);
+void loadMap(MagicTowerScene* scene);
 
 #endif // SCRIPT_H
