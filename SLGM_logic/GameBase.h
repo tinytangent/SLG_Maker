@@ -1,5 +1,5 @@
-#ifndef _GAME_H_
-#define _GAME_H
+#ifndef _GAME_BASE_H_
+#define _GAME_BASE_H_
 
 #include <string>
 #include <map>

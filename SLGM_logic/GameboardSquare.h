@@ -16,11 +16,12 @@ Description:实现了GameBoardSquare类。
 #include <string>
 #include <map>
 #include "GameBase.h"
-#include "GameLayerSquare.h"
 #include "GameEvent.h"
 #include "Game.h"
 
 using namespace std;
+
+class GameLayerSquare;
 
 /*
 * @brief
@@ -46,7 +47,7 @@ public:
 	GameBoardSquare();
 	GameBoardSquare(Game* _parent);
 	//析构函数
-	~GameBoardSquare();
+	//~GameBoardSquare();
 
 	/*
 	* @brief 生成一个指定名称的新层

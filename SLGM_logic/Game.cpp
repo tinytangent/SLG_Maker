@@ -1,5 +1,6 @@
 #include <string>
 #include <map>
+#include"GameboardSquare.h"
 #include "Game.h"
 
 using namespace std;
@@ -30,7 +31,7 @@ int Game::SwitchBGM(int nBGMSerial)
 * @param sBoardName:要加入的GameBoardSquare的名字; gameBoardSquare:指向要加入的GameBoardSquare的指针
 * @return 0:成功新建/加入; 1:已存在同名GameBoardSquare，新建/加入失败
 */
-int Game::AddGameBoardSquare(string sBoardName, GameBoardSquare* newGameBoardSquare = NULL)
+int Game::AddGameBoardSquare(string sBoardName, GameBoardSquare* newGameBoardSquare)
 {
 	if (gameBoardSquare.count(sBoardName) == 1)
 		return 1;
@@ -52,7 +53,7 @@ int Game::AddGameBoardSquare(string sBoardName, GameBoardSquare* newGameBoardSqu
 * @param sBoardName:要删除的GameBoardSquare的名字; bDestroy:是否同时从内存中删除
 * @return 0:成功删除; 1:不存在同名GameBoardSquare，删除失败
 */
-int Game::DeleteGameBoardSquare(string sBoardName, bool bDestroy = true)
+int Game::DeleteGameBoardSquare(string sBoardName, bool bDestroy)
 {
 	if (gameBoardSquare.count(sBoardName) == 0)
 		return 1;
