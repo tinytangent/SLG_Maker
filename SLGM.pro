@@ -5,4 +5,4 @@ TEMPLATE = subdirs
 #TARGET += SLGM_maker SLGM_player
 #DEPENDPATH += . SLGM_maker SLGM_player
 #INCLUDEPATH += . SLGM_maker SLGM_player
-SUBDIRS = SLGM_maker SLGM_player
+SUBDIRS = SLGM_maker SLGM_player SLGM_logic
