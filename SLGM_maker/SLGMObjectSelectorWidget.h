@@ -6,6 +6,7 @@
 
 class SLGMMainWindow;
 class QStandardItemModel;
+class QModelIndex;
 
 class SLGMObjectSelectorWidget : public QWidget
 {
@@ -20,6 +21,7 @@ public:
 signals:
 
 public slots:
+	void onListViewClicked(const QModelIndex & index);
 };
 
 #endif // SLGMOBJECTSELECTORWIDGET_H
