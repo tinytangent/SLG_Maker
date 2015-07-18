@@ -69,7 +69,7 @@ protected:
      * 用于记录魔塔中对象属性的Key-Value对象
      */
     QMap<QString,int> gameProperties;
-
+public:
     //用于定义对象帧动画定义的相关属性
     /**
      * @brief animationData向量列表的每一个元素定义了元素动画的一帧。

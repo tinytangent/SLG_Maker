@@ -10,6 +10,7 @@ class MagicTowerObject;
 class MagicTowerCharacter;
 class MagicTowerExtension;
 class SLGMObjectSelector;
+class SLGMMainWindow;
 class CharacterPropertyExtension;
 
 class MagicTowerMap
@@ -87,6 +88,7 @@ public:
      * @return 如果原有的对象为NULL或release为true，则总是返回NULL，否则返回该处原有的对象（可以被复用）。
      */
     MagicTowerObject* setObjectAt(const QString& layer, const int gridX, const int gridY, MagicTowerObject* object, bool release = true);
+	//Extended properties:
 };
 
 class SLGMEditorScene : public QGraphicsScene
@@ -116,6 +118,9 @@ protected:
      * @brief activeMap记录了当前魔塔的活动地图（楼层），这在切换楼层时格外的有用。
      */
     QString activeMap;
+public:
+	QString currentCursorObject;
+	SLGMMainWindow* mainWindow;
 public:
     /**
      * @brief 重置场景

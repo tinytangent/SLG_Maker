@@ -7,6 +7,8 @@
 #include "CharacterPropertyExtension.h"
 #include <QGraphicsView>
 #include <SLGMObjectSelector.h>
+#include "SLGMEditorWidget.h"
+#include <QDebug>
 
 MagicTowerMap::MagicTowerMap(int _width, int _height)
 {
@@ -161,6 +163,7 @@ bool SLGMEditorScene::setActiveCharacter(MagicTowerCharacter* _activeCharacter)
     return true;
 }
 
+//TODO buggy on map =""
 bool SLGMEditorScene::setActiveMap(const QString& map)
 {
     if(map==activeMap) return true;
@@ -197,7 +200,27 @@ QGraphicsView* SLGMEditorScene::getParentWidget()
 
 void SLGMEditorScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
-    Q_UNUSED(mouseEvent);
+	//TODO : This code is too ugly and requires refatcor.
+	qDebug() << mouseEvent->scenePos().x() << mouseEvent->scenePos().y();
+	int gridX = ((int)mouseEvent->scenePos().x()) / 32;
+	int gridY = ((int)mouseEvent->scenePos().y()) / 32;
+	if(currentCursorObject!="")
+	{
+		SLGMEditorWidget* w = dynamic_cast<SLGMEditorWidget*>(views().at(0)->parent());
+		if(w!=NULL)
+		{
+			qDebug() << "AAA";
+			setObjectAt(activeMap,"main",gridX,gridY,
+					w->loader->getPreset<MagicTowerObject>(currentCursorObject)->clone());
+			//TODO: this is also weird due to current set object behaviour.
+			//TODO: this implememntation is buggy.
+			QString m = activeMap;
+			setActiveMap("1F");
+			setActiveMap("2F");
+			setActiveMap(m);
+		}
+	}
+	//Q_UNUSED(mouseEvent);
 }
 
 QList<QString> SLGMEditorScene::allMaps()
