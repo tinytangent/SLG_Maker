@@ -1,7 +1,7 @@
 #include "SLGMObjectSelectorWidget.h"
 #include "SLGMMainWindow.h"
 #include "SLGMEditorWidget.h"
-#include "MagicTowerObject.h"
+#include "MagicTowerPassiveObject.h"
 #include <QStandardItemModel>
 
 SLGMObjectSelectorWidget::SLGMObjectSelectorWidget(SLGMMainWindow *_mainWindow) : QWidget(_mainWindow)
@@ -19,9 +19,11 @@ void SLGMObjectSelectorWidget::updateObjectList()
 	foreach(const QString& presetName, mainWindow->getEditorWidget()->loader->allPresets().keys())
 	{
 		MagicTowerObject* obj = mainWindow->getEditorWidget()->loader->getPreset<MagicTowerObject>(presetName);
-		if(obj!=NULL)
+		MagicTowerPassiveObject* po = dynamic_cast<MagicTowerPassiveObject*>(obj);
+		if(po!=NULL)
 		{
 			QStandardItem* item = new QStandardItem(presetName);
+			item->setIcon(QIcon(*po->animationData[0].pixmap));
 			objectListModel->insertRow(0,item);
 		}
 	}
