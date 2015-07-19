@@ -2,7 +2,8 @@ QT       += core gui multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE = subdirs
-#TARGET += SLGM_maker SLGM_player
-#DEPENDPATH += . SLGM_maker SLGM_player
-#INCLUDEPATH += . SLGM_maker SLGM_player
-SUBDIRS = SLGM_maker SLGM_player SLGM_logic
+SUBDIRS += \
+	SLGM_logic \
+	SLGM_common \
+	SLGM_maker \
+	SLGM_player

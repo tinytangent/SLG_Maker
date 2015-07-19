@@ -4,6 +4,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 release: DESTDIR = ../release
 debug:   DESTDIR = ../debug
 
+INCLUDEPATH += ../SLGM_common
+
+LIBS += -L../shared/debug -lSLGM_common
+
 TARGET = SLGM_player
 TEMPLATE = app
 SOURCES += \
@@ -20,7 +24,6 @@ SOURCES += \
     NPCDialogExtension.cpp \
     SaveLoadExtension.cpp \
     MagicTowerLoader.cpp \
-    ResourceManager.cpp
 
 HEADERS += \
     MagicTowerScene.h \
@@ -35,4 +38,3 @@ HEADERS += \
     NPCDialogExtension.h \
     SaveLoadExtension.h \
     MagicTowerLoader.h \
-    ResourceManager.h
