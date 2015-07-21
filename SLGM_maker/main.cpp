@@ -3,7 +3,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "SLGMEditorScene.h"
-#include "MagicTowerObject.h"
+#include "SLGCGameUnit.h"
 #include "SLGMMainWindow.h"
 
 int main(int argc,char* argv[])

@@ -1,20 +1,20 @@
 #include <QPainter>
 #include <QPixmap>
-#include "MagicTowerObject.h"
-#include "ResourceManager.h"
+#include "SLGCGameUnit.h"
+#include "SLGCResourceManager.h"
 #include <QTimer>
 #include <QDebug>
 
-QTimer* MagicTowerObject::updateTimer = NULL;
+QTimer* SLGCGameUnit::updateTimer = NULL;
 
-MagicTowerObject::MagicTowerObject(QGraphicsItem* parent)
+SLGCGameUnit::SLGCGameUnit(QGraphicsItem* parent)
     :QGraphicsObject(parent)
 {
     setVisible(false);
     initTimer();
 }
 
-void MagicTowerObject::initTimer()
+void SLGCGameUnit::initTimer()
 {
     if(updateTimer == NULL)
     {
@@ -26,11 +26,11 @@ void MagicTowerObject::initTimer()
     connect(updateTimer,SIGNAL(timeout()),this,SLOT(onFrameUpdateTimer()));
 }
 
-MagicTowerObject::~MagicTowerObject()
+SLGCGameUnit::~SLGCGameUnit()
 {
 }
 
-void MagicTowerObject::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
+void SLGCGameUnit::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
@@ -38,12 +38,12 @@ void MagicTowerObject::paint(QPainter * painter, const QStyleOptionGraphicsItem 
     painter->drawPixmap(0,0,*animationData[currentFrame].pixmap,animationData[currentFrame].x,animationData[currentFrame].y,32,32);
 }
 
-QRectF MagicTowerObject::boundingRect() const
+QRectF SLGCGameUnit::boundingRect() const
 {
     return QRectF(0,0,32,32);
 }
 
-void MagicTowerObject::onFrameUpdateTimer()
+void SLGCGameUnit::onFrameUpdateTimer()
 {
     int frameCount = animationData.size();
     if(frameCount<=1) return;
@@ -52,25 +52,25 @@ void MagicTowerObject::onFrameUpdateTimer()
     update();
 }
 
-void MagicTowerObject::setPixmap(QString _pixmapId)
+void SLGCGameUnit::setPixmap(QString _pixmapId)
 {
     animationData.clear();
     AnimationFrame frame;
     frame.x = frame.y = 0;
     frame.pixmapId = _pixmapId;
-    frame.pixmap = &ResourceManager::getInstance()->getPixmap(_pixmapId);
+	frame.pixmap = &SLGCResourceManager::getInstance()->getPixmap(_pixmapId);
     animationData.append(frame);
     currentFrame = 0;
     update();
 }
 
-void MagicTowerObject::setTwoFrameAnimation(QString _pixmapId)
+void SLGCGameUnit::setTwoFrameAnimation(QString _pixmapId)
 {
     animationData.clear();
     AnimationFrame frame;
     frame.x = frame.y = 0;
     frame.pixmapId = _pixmapId;
-    frame.pixmap = &ResourceManager::getInstance()->getPixmap(_pixmapId);
+	frame.pixmap = &SLGCResourceManager::getInstance()->getPixmap(_pixmapId);
     animationData.append(frame);
     frame.x = 32;
     animationData.append(frame);
@@ -78,55 +78,55 @@ void MagicTowerObject::setTwoFrameAnimation(QString _pixmapId)
     update();
 }
 
-void MagicTowerObject::setPixmapFrameAnimation(const QVector<AnimationFrame>& animation)
+void SLGCGameUnit::setPixmapFrameAnimation(const QVector<AnimationFrame>& animation)
 {
     animationData = animation;
     for(int i=0;i<animationData.size();i++)
     {
-        animationData[i].pixmap=&ResourceManager::getInstance()->getPixmap(animationData[i].pixmapId);
+		animationData[i].pixmap=&SLGCResourceManager::getInstance()->getPixmap(animationData[i].pixmapId);
     }
     currentFrame = 0;
 }
 
-bool MagicTowerObject::setGameProperty(const QString &name, int value)
+bool SLGCGameUnit::setGameProperty(const QString &name, int value)
 {
     gameProperties[name] = value;
     return true;
 }
 
-int MagicTowerObject::getGameProperty(const QString& name)
+int SLGCGameUnit::getGameProperty(const QString& name)
 {
     return gameProperties[name];
 }
 
-const QString& MagicTowerObject::getLayer()
+const QString& SLGCGameUnit::getLayer()
 {
     return layer;
 }
 
-const QString& MagicTowerObject::getMap()
+const QString& SLGCGameUnit::getMap()
 {
     return map;
 }
 
-int MagicTowerObject::getGridX()
+int SLGCGameUnit::getGridX()
 {
     return gridX;
 }
 
-int MagicTowerObject::getGridY()
+int SLGCGameUnit::getGridY()
 {
     return gridY;
 }
 
-void MagicTowerObject::setPresetName(const QString &_presetName)
+void SLGCGameUnit::setPresetName(const QString &_presetName)
 {
     presetName = _presetName;
 }
 
-MagicTowerObject* MagicTowerObject::clone()
+SLGCGameUnit* SLGCGameUnit::clone()
 {
-    MagicTowerObject* ret = new MagicTowerObject();
+	SLGCGameUnit* ret = new SLGCGameUnit();
     ret->gameProperties = this->gameProperties;
     ret->animationData = this->animationData;
     ret->currentFrame = this->currentFrame;
@@ -134,7 +134,7 @@ MagicTowerObject* MagicTowerObject::clone()
     return ret;
 }
 
-const QMap<QString,int>& MagicTowerObject::getAllGameProperties()
+const QMap<QString,int>& SLGCGameUnit::getAllGameProperties()
 {
     return gameProperties;
 }

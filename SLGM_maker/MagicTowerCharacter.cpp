@@ -1,8 +1,9 @@
 #include "MagicTowerCharacter.h"
 #include "SLGMEditorScene.h"
 #include "MagicTowerPassiveObject.h"
-#include "ResourceManager.h"
+#include "SLGCResourceManager.h"
 #include "SaveLoadExtension.h"
+#include "SGLCGameMap.h"
 #include <QPropertyAnimation>
 #include <QKeyEvent>
 MagicTowerCharacter::MagicTowerCharacter()
@@ -103,7 +104,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
         {
             AnimationFrame frame;
             frame.pixmapId = characterAnimationSheet;
-            frame.pixmap = &ResourceManager::getInstance()->getPixmap(characterAnimationSheet);
+			frame.pixmap = &SLGCResourceManager::getInstance()->getPixmap(characterAnimationSheet);
             frame.y = 32*i;
             frame.x = 32*j;
             directionAnimationData[i].append(frame);
@@ -111,7 +112,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
         directionSingleFrameData[i].clear();
         AnimationFrame frame;
         frame.pixmapId = characterAnimationSheet;
-        frame.pixmap = &ResourceManager::getInstance()->getPixmap(characterAnimationSheet);
+		frame.pixmap = &SLGCResourceManager::getInstance()->getPixmap(characterAnimationSheet);
         frame.y = 32*i;
         frame.x = 0;
         directionSingleFrameData[i].append(frame);
@@ -123,7 +124,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
 void MagicTowerCharacter::beginMove()
 {
     SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
-    MagicTowerMap* map = scene->getMap(this->map);
+	SLGCGameMap* map = scene->getMap(this->map);
     int targetX,targetY,originX = gridX,originY = gridY;
     switch(moveDirection)
     {
@@ -167,7 +168,7 @@ void MagicTowerCharacter::beginMove()
 void MagicTowerCharacter::finishMove()
 {
     SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
-    MagicTowerMap* map = scene->getMap(this->map);
+	SLGCGameMap* map = scene->getMap(this->map);
     MagicTowerPassiveObject* originalObject = dynamic_cast<MagicTowerPassiveObject*>(map->getObjectAt("main",gridX,gridY));
     if(originalObject!=NULL) originalObject->onMoveToHandler();
     if(moveDirection!=STOPPED)
@@ -188,7 +189,7 @@ void MagicTowerCharacter::focusOutEvent(QFocusEvent *event)
     keyTable.clear();
 }
 
-MagicTowerObject* MagicTowerCharacter::clone()
+SLGCGameUnit* MagicTowerCharacter::clone()
 {
     MagicTowerCharacter* ret = new MagicTowerCharacter();
     ret->gameProperties = this->gameProperties;

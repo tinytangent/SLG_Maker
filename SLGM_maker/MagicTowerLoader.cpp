@@ -5,7 +5,7 @@
 #include <QString>
 #include <QMessageBox>
 #include "MagicTowerLoader.h"
-#include "ResourceManager.h"
+#include "SLGCResourceManager.h"
 #include "script.h"
 
 MagicTowerLoader::MagicTowerLoader(SLGMEditorScene *_scene)
@@ -25,7 +25,7 @@ void MagicTowerLoader::loadResource(const QString& resourcePath)
     {
         if(resourceList[i].isFile() && resourceList[i].suffix()=="png")
         {
-            if(!ResourceManager::getInstance()->addPixmap(resourceList[i].baseName(),resourceList[i].filePath()))
+			if(!SLGCResourceManager::getInstance()->addPixmap(resourceList[i].baseName(),resourceList[i].filePath()))
             {
                 QMessageBox::critical(NULL,QString("警告"),
                                          QString("警告：存在未加载的资源文件。\n"
@@ -35,7 +35,7 @@ void MagicTowerLoader::loadResource(const QString& resourcePath)
         }
 		else if(resourceList[i].isFile() && resourceList[i].suffix()=="wav")
 		{
-			if(!ResourceManager::getInstance()->addAudio(resourceList[i].baseName(),resourceList[i].filePath()))
+			if(!SLGCResourceManager::getInstance()->addAudio(resourceList[i].baseName(),resourceList[i].filePath()))
 			{
 				QMessageBox::critical(NULL,QString("警告"),
 										 QString("Audio Load Fail %1").arg(resourceList[i].filePath()));
@@ -130,7 +130,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         if(mapParts.size()<=1) continue;
         QString mapName = mapParts[1];
         scene->addMap(mapName,13,13);
-        MagicTowerMap* map = scene->getMap(mapName);
+		SLGCGameMap* map = scene->getMap(mapName);
         map->addLayer("character",200);
         map->addLayer("main",100);
         map->addLayer("ground",0);
@@ -142,7 +142,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
             {
                 for(int j=0;j<13;j++)
                 {
-                    MagicTowerObject* obj = new MagicTowerObject();
+                    SLGCGameUnit* obj = new SLGCGameUnit();
                     obj->setPixmap("ground");
                     scene->setObjectAt(mapName,"ground",j,i,obj);
 
@@ -157,7 +157,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
             QStringList mapLineParts = mapLine.split("|");
             for(int j=0;j<13;j++)
             {
-                MagicTowerObject* obj = new MagicTowerObject();
+                SLGCGameUnit* obj = new SLGCGameUnit();
                 obj->setPixmap("ground");
                 scene->setObjectAt(mapName,"ground",j,i,obj);
                 if(j==0||j==12)
@@ -198,7 +198,7 @@ bool MagicTowerLoader::addPresetPassiveObject(const QMap<QString,QString>& param
     MagicTowerPassiveObject* object = new MagicTowerPassiveObject();
     if(parameters.find("pixmap")!=parameters.end())
     {
-        if(ResourceManager::getInstance()->getPixmap(parameters["pixmap"]).isNull())
+		if(SLGCResourceManager::getInstance()->getPixmap(parameters["pixmap"]).isNull())
         {
             QMessageBox::critical(NULL,QString("警告"),
                                      QString("警告：预设%1试图引用未加载的资源文件。\n"
@@ -314,7 +314,7 @@ bool MagicTowerLoader::addPresetCharacter(const QMap<QString, QString> &paramete
         delete object;
         return false;
     }
-    if(ResourceManager::getInstance()->getPixmap(parameters["characterAnimation"]).isNull())
+	if(SLGCResourceManager::getInstance()->getPixmap(parameters["characterAnimation"]).isNull())
     {
         QMessageBox::critical(NULL,QString("警告"),
                                  QString("警告：预设%1试图引用未加载的资源文件。\n"
@@ -345,7 +345,7 @@ bool MagicTowerLoader::addPresetCharacter(const QMap<QString, QString> &paramete
 
 void MagicTowerLoader::loadGame(const QString& gamePath)
 {
-    ResourceManager::init();
+	SLGCResourceManager::init();
     loadResource(gamePath+"/res");
     loadPreset(gamePath + "/startup.mtpreset.ini");
 }
@@ -360,7 +360,7 @@ void MagicTowerLoader::unloadGame()
     }
     objectPreset.clear();
     scene->reset();
-    ResourceManager::release();
+	SLGCResourceManager::release();
 }
 
 bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& saveName)

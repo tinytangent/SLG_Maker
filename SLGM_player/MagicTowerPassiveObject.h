@@ -1,7 +1,8 @@
 #ifndef MAGICTOWERPASSIVEOBJECT_H
 #define MAGICTOWERPASSIVEOBJECT_H
-#include "MagicTowerObject.h"
+#include "SLGCGameUnit.h"
 
+class MagicTowerScene;
 class MagicTowerPassiveObject;
 class MagicTowerPassiveObjectEventHandler;
 
@@ -27,7 +28,7 @@ public:
 
 typedef MagicTowerPassiveObjectEventHandler MTPOEHandler;
 
-class MagicTowerPassiveObject : public MagicTowerObject
+class MagicTowerPassiveObject : public SLGCGameUnit
 {
     Q_OBJECT
 public:
@@ -41,7 +42,7 @@ public:
     MTPOEHandler* handler;
 
     //自我复制函数
-    virtual MagicTowerObject* clone();
+    virtual SLGCGameUnit* clone();
 signals:
 
 public slots:

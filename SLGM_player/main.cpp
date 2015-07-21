@@ -3,7 +3,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include "MagicTowerScene.h"
-#include "MagicTowerObject.h"
+#include "SLGCGameUnit.h"
 int main(int argc,char* argv[])
 {
     QApplication app(argc,argv);

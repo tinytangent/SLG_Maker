@@ -6,90 +6,13 @@
 #include <QGraphicsView>
 
 class QString;
-class MagicTowerObject;
+class SLGCGameUnit;
 class MagicTowerCharacter;
 class MagicTowerExtension;
 class SLGMObjectSelector;
 class SLGMMainWindow;
 class CharacterPropertyExtension;
-
-class MagicTowerMap
-{
-public:
-    /**
-     * @brief reset重置整张地图，已经添加到其中的所有对象。
-     */
-    void reset();
-
-    /**
-     * @brief layers地图中所存储的所有图层。
-     */
-    QMap<QString, MagicTowerObject**> layers;
-
-    /**
-     * @brief layerZOrders记录每一个图层的zOrder，即层叠显示顺序
-     */
-    QMap<QString, int> layerZOrders;
-
-    /**
-     * @brief 地图宽度
-     */
-    int width;
-
-    /**
-     * @brief 地图高度
-     */
-    int height;
-
-    /**
-     * @brief MagicTowerMap 构造函数，需要指定地图高度和宽度
-     * @param _width指定地图宽度
-     * @param _height指定地图高度
-     */
-    MagicTowerMap(int _width,int _height);
-
-    /**
-      * 析构函数，会释放内存。
-      */
-    ~MagicTowerMap();
-
-    /**
-     * @brief addLayer 向地图之中添加图层
-     * @param name 地图的名称
-     * @param zValue 地图的zOrder，叠放次序
-     * @return 是否添加成功
-     */
-    bool addLayer(QString name, int zValue);
-
-    /**
-     * @brief setActiveMap设置当前图层的显示状态
-     * @param isActived当前图层是否显示
-     */
-    void setActiveMap(bool isActived);
-
-    /**
-     * @brief getObjectAt获取某一位置的对象
-     * @param layer图层名
-     * @param gridX横坐标
-     * @param gridY纵坐标
-     * @return 该位置的对象，可能为NULL
-     */
-    MagicTowerObject* getObjectAt(const QString& layer, const int gridX, const int gridY);
-
-	QString backgroundMusic;
-
-    /**
-     * @brief setObjectAt设置某一位置的对象
-     * @param layer图层名
-     * @param gridX横坐标
-     * @param gridY纵坐标
-     * @param object希望该位置被设置成的对象
-     * @param release是否delete该处原有的对象（安全的，如果原有为NULL，不delete）
-     * @return 如果原有的对象为NULL或release为true，则总是返回NULL，否则返回该处原有的对象（可以被复用）。
-     */
-    MagicTowerObject* setObjectAt(const QString& layer, const int gridX, const int gridY, MagicTowerObject* object, bool release = true);
-	//Extended properties:
-};
+class SLGCGameMap;
 
 class SLGMEditorScene : public QGraphicsScene
 {
@@ -102,7 +25,7 @@ protected:
     /**
      * @brief maps关联数组存储了魔塔中所有的地图（每一层是一张地图）
      */
-    QMap<QString, MagicTowerMap*> maps;
+	QMap<QString, SLGCGameMap*> maps;
 
     /**
      * @brief activeCharacter表示魔塔当前的“活动”（受操纵的）人物。
@@ -147,7 +70,7 @@ public:
      * @param name
      * @return
      */
-    MagicTowerMap* getMap (const QString& name);
+	SLGCGameMap* getMap (const QString& name);
     QList<QString> allMaps();
 
     /**
@@ -159,9 +82,9 @@ public:
     bool addLayer(QString map, QString name);
 
     //用于设置或者获取在某一处的对象
-    MagicTowerObject* setObjectAt(const QString& map, const QString& layer, int x, int y, MagicTowerObject* obj, bool release = true);
-    MagicTowerObject* setObjectAt(MagicTowerObject* oldObject, MagicTowerObject* newObject, bool release = true);
-    MagicTowerObject* getObjectAt(const QString& map, const QString& layer, int x, int y);
+    SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
+    SLGCGameUnit* setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release = true);
+    SLGCGameUnit* getObjectAt(const QString& map, const QString& layer, int x, int y);
 
     //设置当前的活动地图
     bool setActiveMap(const QString& map);

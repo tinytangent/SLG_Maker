@@ -13,7 +13,6 @@ TEMPLATE = app
 SOURCES += \
     main.cpp \
     MagicTowerScene.cpp \
-    MagicTowerObject.cpp \
     MagicTowerCharacter.cpp \
     script.cpp \
     MagicTowerPassiveObject.cpp \
@@ -23,11 +22,10 @@ SOURCES += \
     CombatDialogExtension.cpp \
     NPCDialogExtension.cpp \
     SaveLoadExtension.cpp \
-    MagicTowerLoader.cpp \
+	MagicTowerLoader.cpp
 
 HEADERS += \
     MagicTowerScene.h \
-    MagicTowerObject.h \
     MagicTowerCharacter.h \
     script.h \
     MagicTowerPassiveObject.h \
@@ -37,4 +35,4 @@ HEADERS += \
     CombatDialogExtension.h \
     NPCDialogExtension.h \
     SaveLoadExtension.h \
-    MagicTowerLoader.h \
+	MagicTowerLoader.h

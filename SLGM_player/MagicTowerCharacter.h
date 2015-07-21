@@ -1,7 +1,7 @@
 #ifndef MAGICTOWERCHARACTER_H
 #define MAGICTOWERCHARACTER_H
 
-#include "MagicTowerObject.h"
+#include "SLGCGameUnit.h"
 #include <QPropertyAnimation>
 
 enum Direction
@@ -12,7 +12,7 @@ enum Direction
     UP = 3,
     STOPPED,
 };
-class MagicTowerCharacter : public MagicTowerObject
+class MagicTowerCharacter : public SLGCGameUnit
 {
     Q_OBJECT
 protected:
@@ -66,7 +66,7 @@ public:
      * @param 角色动画表
      */
     virtual void setCharacterAnimation(const QString& character);
-    virtual MagicTowerObject* clone();
+    virtual SLGCGameUnit* clone();
 public slots:
     /**
      * @brief beginMove用于处理移动开始的函数

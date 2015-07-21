@@ -9,7 +9,13 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 HEADERS += \
-	ResourceManager.h
+    SLGCResourceManager.h \
+    SLGCGame.h \
+    SLGCGameUnit.h \
+    SGLCGameMap.h
 
 SOURCES += \
-	ResourceManager.cpp
+    SLGCResourceManager.cpp \
+    SGLCGame.cpp \
+    SLGCGameUnit.cpp \
+    SGLCGameMap.cpp

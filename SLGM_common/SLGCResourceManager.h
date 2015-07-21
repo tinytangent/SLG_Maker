@@ -11,7 +11,7 @@ class QSoundEffect;
 /**
  * @brief PixmapPool类提供了一个图像缓存池，可以统一地加载位图并且通过一个字符串alias进行访问。
  */
-class ResourceManager
+class SLGCResourceManager
 {
 public:
     /**
@@ -30,7 +30,7 @@ public:
      * @brief getInstance获取当前唯一的位图缓冲池的实例
      * @return 当前位图缓冲池的示例，如果该实例不存在，返回NULL
      */
-	static ResourceManager* getInstance();
+	static SLGCResourceManager* getInstance();
 protected:
     /**
      * @brief nullPixmap是用于getPixmap在遇到错误的时候返回的空位图。
@@ -45,7 +45,7 @@ protected:
     /**
      * @brief instance是一个保护的静态成员，是PixmapPool的唯一实例。
      */
-	static ResourceManager* instance;
+	static SLGCResourceManager* instance;
 
     /**
      * @brief data用于存储字符串到对应位图的指针。
@@ -60,12 +60,12 @@ protected:
     /**
      * @brief PixmapPool是受到保护的构造函数，他什么都不做，被保护是为了实现单例模式。
      */
-	ResourceManager();
+	SLGCResourceManager();
 
     /**
       * @brief PixmapPool类的析构函数，用于释放所有已经为Pixmap对象分配的内存。
       */
-	~ResourceManager();
+	~SLGCResourceManager();
 public:
     /**
      * @brief addPixmap 向位图缓冲池中添加一个位图

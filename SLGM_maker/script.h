@@ -3,8 +3,8 @@
 
 #include "SLGMEditorScene.h"
 #include "MagicTowerCharacter.h"
-#include "MagicTowerObject.h"
-#include "ResourceManager.h"
+#include "SLGCGameUnit.h"
+#include "SLGCResourceManager.h"
 #include "MagicTowerPassiveObject.h"
 #include "CharacterPropertyExtension.h"
 #include "DialogExtension.h"
@@ -13,6 +13,7 @@
 #include "NPCDialogExtension.h"
 #include "MagicTowerLoader.h"
 #include "SaveLoadExtension.h"
+#include "SGLCGameMap.h"
 
 /**
  * @brief GeneralItemHandler is used to handle all Items that is used to increase or decrease some
@@ -103,8 +104,8 @@ public:
         scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
         scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
-		ResourceManager::getInstance()->getAudio(scene->getMap(mapPrev)->backgroundMusic).stop();
-		ResourceManager::getInstance()->getAudio(scene->getMap(mapNext)->backgroundMusic).play();
+		SLGCResourceManager::getInstance()->getAudio(scene->getMap(mapPrev)->backgroundMusic).stop();
+		SLGCResourceManager::getInstance()->getAudio(scene->getMap(mapNext)->backgroundMusic).play();
     }
     TransporterHandler(const QString& _targetMap, const QString& _targetLayer, int _targetX, int _targetY):
         targetMap(_targetMap),

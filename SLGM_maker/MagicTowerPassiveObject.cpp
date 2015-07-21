@@ -2,7 +2,7 @@
 #include "SLGMEditorScene.h"
 
 MagicTowerPassiveObject::MagicTowerPassiveObject(QGraphicsItem* parent)
-    :MagicTowerObject(parent)
+    :SLGCGameUnit(parent)
 {
     handler = NULL;
 }
@@ -20,7 +20,7 @@ bool MagicTowerPassiveObject::onAttemptMoveHandler()
     }
 }
 
-MagicTowerObject* MagicTowerPassiveObject::clone()
+SLGCGameUnit* MagicTowerPassiveObject::clone()
 {
     MagicTowerPassiveObject* ret = new MagicTowerPassiveObject();
     ret->gameProperties = this->gameProperties;

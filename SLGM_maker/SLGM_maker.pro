@@ -18,7 +18,6 @@ SOURCES += \
     MagicTowerCharacter.cpp \
     MagicTowerExtension.cpp \
     MagicTowerLoader.cpp \
-    MagicTowerObject.cpp \
     MagicTowerPassiveObject.cpp \
     NPCDialogExtension.cpp \
     SaveLoadExtension.cpp \
@@ -27,7 +26,7 @@ SOURCES += \
     SLGMMainWindow.cpp \
     SLGMEditorScene.cpp \
     SLGMEditorWidget.cpp \
-    SLGMObjectSelectorWidget.cpp
+	SLGMObjectSelectorWidget.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -37,7 +36,6 @@ HEADERS += \
     MagicTowerCharacter.h \
     MagicTowerExtension.h \
     MagicTowerLoader.h \
-    MagicTowerObject.h \
     MagicTowerPassiveObject.h \
     NPCDialogExtension.h \
     SaveLoadExtension.h \
@@ -46,7 +44,7 @@ HEADERS += \
     SLGMMainWindow.h \
     SLGMEditorScene.h \
     SLGMEditorWidget.h \
-    SLGMObjectSelectorWidget.h
+	SLGMObjectSelectorWidget.h
 
 FORMS += \
     slgmmainwindow.ui \

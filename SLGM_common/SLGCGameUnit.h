@@ -6,8 +6,8 @@
 #include <QVector>
 
 
-class MagicTowerScene;
-class MagicTowerMap;
+class SLGMEditorScene;
+class SLGCGameMap;
 
 /**
  * @brief AnimationFrame类用来描述逐帧动画中的一帧。
@@ -36,10 +36,11 @@ public:
     int y;
 };
 
-class MagicTowerObject : public QGraphicsObject
+class SLGCGameUnit : public QGraphicsObject
 {
-    friend class MagicTowerMap;
-    friend class MagicTowerScene;
+	friend class SLGCGameMap;
+    friend class SLGMEditorScene;
+	friend class MagicTowerScene;
 
     Q_OBJECT
 protected:
@@ -69,7 +70,7 @@ protected:
      * 用于记录魔塔中对象属性的Key-Value对象
      */
     QMap<QString,int> gameProperties;
-
+public:
     //用于定义对象帧动画定义的相关属性
     /**
      * @brief animationData向量列表的每一个元素定义了元素动画的一帧。
@@ -103,12 +104,12 @@ public:
      * @brief 构造函数，初始化计时器并默认设置对象为隐藏。
      * @param parent父对象
      */
-    MagicTowerObject(QGraphicsItem* parent = 0);
+	SLGCGameUnit(QGraphicsItem* parent = 0);
 
     /**
       * 析构函数
       */
-    ~MagicTowerObject();
+	~SLGCGameUnit();
 
     /**
      * @brief 实现基类的paint纯虚函数，用于完成对象的绘制任务。所有参数均未被实际使用。
@@ -197,7 +198,7 @@ public:
      * @brief 自我复制函数
      * @return
      */
-    virtual MagicTowerObject* clone();
+	virtual SLGCGameUnit* clone();
 public slots:
 
     /**

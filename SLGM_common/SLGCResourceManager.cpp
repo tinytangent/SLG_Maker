@@ -1,15 +1,15 @@
-#include "ResourceManager.h"
+#include "SLGCResourceManager.h"
 #include <QSoundEffect>
 #include <QThread>
 #include <QDebug>
 
-ResourceManager* ResourceManager::instance = NULL;
+SLGCResourceManager* SLGCResourceManager::instance = NULL;
 
-ResourceManager::ResourceManager()
+SLGCResourceManager::SLGCResourceManager()
 {
 }
 
-ResourceManager::~ResourceManager()
+SLGCResourceManager::~SLGCResourceManager()
 {
 	QMapIterator<QString, QPixmap*> i(pixmapData);
     while (i.hasNext())
@@ -19,7 +19,7 @@ ResourceManager::~ResourceManager()
     }
 }
 
-bool ResourceManager::addPixmap(const QString& alias, const QString& fileName)
+bool SLGCResourceManager::addPixmap(const QString& alias, const QString& fileName)
 {
 	if(pixmapData.find(alias)!=pixmapData.end()) return false;
     QPixmap* pixmap = new QPixmap(fileName);
@@ -32,21 +32,21 @@ bool ResourceManager::addPixmap(const QString& alias, const QString& fileName)
     return true;
 }
 
-const QPixmap& ResourceManager::getPixmap(const QString& alias) const
+const QPixmap& SLGCResourceManager::getPixmap(const QString& alias) const
 {
 	if(pixmapData.find(alias)!=pixmapData.end())
 		return *pixmapData[alias];
     else return nullPixmap;
 }
 
-bool ResourceManager::init()
+bool SLGCResourceManager::init()
 {
     if(instance!=NULL) return false;
-	instance = new ResourceManager();
+	instance = new SLGCResourceManager();
     return true;
 }
 
-bool ResourceManager::release()
+bool SLGCResourceManager::release()
 {
     if(instance==NULL) return false;
     delete instance;
@@ -54,12 +54,12 @@ bool ResourceManager::release()
     return false;
 }
 
-ResourceManager* ResourceManager::getInstance()
+SLGCResourceManager* SLGCResourceManager::getInstance()
 {
     return instance;
 }
 
-bool ResourceManager::addAudio(const QString& alias, const QString& fileName)
+bool SLGCResourceManager::addAudio(const QString& alias, const QString& fileName)
 {
 	if(audioData.find(alias)!=audioData.end()) return false;
 	QSoundEffect* audio = new QSoundEffect();
@@ -81,7 +81,7 @@ bool ResourceManager::addAudio(const QString& alias, const QString& fileName)
 	return true;
 }
 
-QSoundEffect& ResourceManager::getAudio(const QString& alias)
+QSoundEffect& SLGCResourceManager::getAudio(const QString& alias)
 {
 	if(audioData.find(alias)!=audioData.end())
 		return *audioData[alias];

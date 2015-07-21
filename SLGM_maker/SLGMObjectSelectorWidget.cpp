@@ -20,7 +20,7 @@ void SLGMObjectSelectorWidget::updateObjectList()
 {
 	foreach(const QString& presetName, mainWindow->getEditorWidget()->loader->allPresets().keys())
 	{
-		MagicTowerObject* obj = mainWindow->getEditorWidget()->loader->getPreset<MagicTowerObject>(presetName);
+		SLGCGameUnit* obj = mainWindow->getEditorWidget()->loader->getPreset<SLGCGameUnit>(presetName);
 		MagicTowerPassiveObject* po = dynamic_cast<MagicTowerPassiveObject*>(obj);
 		if(po!=NULL)
 		{
