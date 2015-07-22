@@ -22,7 +22,7 @@ private:
 	GameLayerSquare* parent;
 public:
 	GameUnit();
-	GameUnit(string _UnitName, int x, int y);
+	GameUnit(GameLayerSquare* _parent, string _UnitName, int x, int y);
 	GameUnit(GameLayerSquare* _parent);
 	~GameUnit();
 

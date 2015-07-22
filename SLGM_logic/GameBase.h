@@ -45,6 +45,7 @@ public:
 	* @return 0:成功新建; 1:已存在同名整形; 2:已存在同名浮点数; 3:已存在同名字符串
 	*/
 	int AddProperty(string sPropertyName, string sValue);
+
 	/*
 	* @brief 删除指定名称的属于自身的变量
 	*        注意！就算在游戏过程中一个变量被删除了，它依然可能对游戏产生影响！
@@ -71,24 +72,24 @@ public:
 	* @return 0:成功新建; 1:不存在同名整形;
 	*/
 	int ChangeProperty(string sPropertyName, string sValue);
+
+//////////////////////////////查询函数//////////////////////////////
 	/*
 	* @brief 查询指定名称的属于自身的整形的值
 	* @param sPropertyName:变量名; nValue:查询到的变量值
 	* @return 0:成功查询; 1:不存在同名整形;
 	*/
-
-//////////////////////////////查询函数//////////////////////////////
 	int QueryProperty(string sPropertyName, int* nValue);
 	/*
 	* @brief 查询指定名称的属于自身的浮点数的值
 	* @param sPropertyName:变量名; dValue:查询到的变量值
-	* @return 0:成功查询; 1:不存在同名整形;
+	* @return 0:成功查询; 1:不存在同名浮点数;
 	*/
 	int QueryProperty(string sPropertyName, double* dValue);
 	/*
 	* @brief 查询指定名称的属于自身的字符串的值
 	* @param sPropertyName:变量名; sValue:查询到的变量值
-	* @return 0:成功查询; 1:不存在同名整形;
+	* @return 0:成功查询; 1:不存在同名字符串;
 	*/
 	int QueryProperty(string sPropertyName, string* sValue);
 };
