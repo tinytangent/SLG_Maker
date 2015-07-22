@@ -12,7 +12,7 @@ HEADERS += \
     SLGCResourceManager.h \
     SLGCGame.h \
     SLGCGameUnit.h \
-    SGLCGameMap.h
+    SLGCGameMap.h
 
 SOURCES += \
     SLGCResourceManager.cpp \

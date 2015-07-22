@@ -13,7 +13,7 @@
 #include "NPCDialogExtension.h"
 #include "MagicTowerLoader.h"
 #include "SaveLoadExtension.h"
-#include "SGLCGameMap.h"
+#include "SLGCGameMap.h"
 
 /**
  * @brief GeneralItemHandler is used to handle all Items that is used to increase or decrease some

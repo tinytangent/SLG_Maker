@@ -6,6 +6,7 @@
 #include <QTimer>
 #include "CharacterPropertyExtension.h"
 #include "SaveLoadExtension.h"
+#include "SLGCGame.h"
 
 CombatDialogExtension::CombatDialogExtension(SLGMEditorScene* scene) :
     DialogExtension(scene)
@@ -71,7 +72,7 @@ void CombatDialogExtension::onFightTimer()
             int gold = character->getGameProperty("gold");
             gold += monster->getGameProperty("gold");
             character->setGameProperty("gold",gold);
-            magicTowerScene->setObjectAt(monster->getMap(),monster->getLayer(),monster->getGridX(),monster->getGridY(),NULL);
+			magicTowerScene->setObjectAt(monster->getMap(),monster->getLayer(),monster->getGridX(),monster->getGridY(),NULL);
             hideDialog();
             fightTimer->stop();
         }

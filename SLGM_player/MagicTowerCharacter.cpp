@@ -3,7 +3,7 @@
 #include "MagicTowerPassiveObject.h"
 #include "SLGCResourceManager.h"
 #include "SaveLoadExtension.h"
-#include "SGLCGameMap.h"
+#include "SLGCGameMap.h"
 #include <QPropertyAnimation>
 #include <QKeyEvent>
 MagicTowerCharacter::MagicTowerCharacter()

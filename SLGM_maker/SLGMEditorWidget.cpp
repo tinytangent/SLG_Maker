@@ -1,6 +1,7 @@
 #include "SLGMEditorWidget.h"
 #include "SLGMEditorScene.h"
 #include "MagicTowerCharacter.h"
+#include "SLGCGame.h"
 
 SLGMEditorWidget::SLGMEditorWidget(QWidget *parent)
 	: QWidget(parent)
@@ -19,7 +20,7 @@ void SLGMEditorWidget::loadGame(const QString &filePath)
 	MagicTowerCharacter* obj2= (MagicTowerCharacter*)loader->getPreset<MagicTowerCharacter>("warrior")->clone();
 	this->gameScene->setObjectAt("1F","character",6,11,obj2);
 	this->gameScene->setActiveCharacter(obj2);
-	foreach(const QString& mapName, gameScene->allMaps())
+	foreach(const QString& mapName, gameScene->game->allMaps())
 	{
 		ui.comboBoxMaps->insertItem(0,mapName);
 	}

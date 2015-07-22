@@ -3,7 +3,8 @@
 #include "MagicTowerPassiveObject.h"
 #include "SLGCResourceManager.h"
 #include "SaveLoadExtension.h"
-#include "SGLCGameMap.h"
+#include "SLGCGame.h"
+#include "SLGCGameMap.h"
 #include <QPropertyAnimation>
 #include <QKeyEvent>
 MagicTowerCharacter::MagicTowerCharacter()
@@ -124,7 +125,7 @@ void MagicTowerCharacter::setCharacterAnimation(const QString& characterAnimatio
 void MagicTowerCharacter::beginMove()
 {
     SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
-	SLGCGameMap* map = scene->getMap(this->map);
+	SLGCGameMap* map = scene->game->getMap(this->map);
     int targetX,targetY,originX = gridX,originY = gridY;
     switch(moveDirection)
     {
@@ -168,7 +169,7 @@ void MagicTowerCharacter::beginMove()
 void MagicTowerCharacter::finishMove()
 {
     SLGMEditorScene* scene = dynamic_cast<SLGMEditorScene*>(this->scene());
-	SLGCGameMap* map = scene->getMap(this->map);
+	SLGCGameMap* map = scene->game->getMap(this->map);
     MagicTowerPassiveObject* originalObject = dynamic_cast<MagicTowerPassiveObject*>(map->getObjectAt("main",gridX,gridY));
     if(originalObject!=NULL) originalObject->onMoveToHandler();
     if(moveDirection!=STOPPED)

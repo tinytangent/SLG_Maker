@@ -4,6 +4,7 @@
 #include "NPCDialogExtension.h"
 #include "CombatDialogExtension.h"
 #include "CharacterPropertyExtension.h"
+#include "SLGCGame.h"
 SaveLoadExtension::SaveLoadExtension(SLGMEditorScene* scene)
     :MagicTowerExtension(scene),loader(scene)
 {
@@ -104,7 +105,7 @@ void SaveLoadExtension::onButtonStartNewGamePressed()
     }
     loader.loadMap(gamePath + "/startup.mtmap.ini");
     MagicTowerCharacter* obj2= (MagicTowerCharacter*)loader.getPreset<MagicTowerCharacter>("warrior")->clone();
-    magicTowerScene->setObjectAt("1F","character",6,11,obj2);
+	magicTowerScene->setObjectAt("1F","character",6,11,obj2);
     magicTowerScene->setActiveCharacter(obj2);
     deactive();
     gamePlayed = true;

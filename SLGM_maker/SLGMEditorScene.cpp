@@ -9,62 +9,13 @@
 #include <SLGMObjectSelector.h>
 #include "SLGMEditorWidget.h"
 #include <QDebug>
+#include "SLGCGame.h"
 
 SLGMEditorScene::SLGMEditorScene(QObject* parent)
     :QGraphicsScene(parent)
 {
-	/*parentWidget = new QGraphicsView();
-    parentWidget->setWindowTitle("魔塔");
-    parentWidget->setScene(this);
-    parentWidget->show();
-    parentWidget->setSceneRect(QRectF(-5*32,0,18*32,13*32));
-    parentWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    parentWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	parentWidget->setMinimumSize((18+2)*32+2,
-								 13*32+2);*/
-	/*activeCharacter = NULL;
-	SLGMObjectSelector* sel = new SLGMObjectSelector(NULL);
-
-    loadMap(this);
-	sel->setPos(QPointF(0,0));
-	sel->setZValue(1e10);
-		addItem(sel);*/
-}
-
-bool SLGMEditorScene::addMap(QString name, int width, int height)
-{
-    if(maps.find(name)!=maps.end()) return false;
-	SLGCGameMap* map = new SLGCGameMap(width,height);
-    maps.insert(name, map);
-    return true;
-}
-
-SLGCGameMap* SLGMEditorScene::getMap(const QString& name)
-{
-    Q_ASSERT(maps.find(name)!=maps.end());
-    return maps[name];
-}
-
-SLGCGameUnit *SLGMEditorScene::setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release)
-{
-    Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
-    if(obj!=NULL)
-    {
-        obj->map = map;
-        addItem(obj);
-    }
-    return getMap(map)->setObjectAt(layer,x,y,obj,release);
-}
-
-SLGCGameUnit* SLGMEditorScene::setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release)
-{
-    return setObjectAt(oldObject->map, oldObject->layer,oldObject->getGridX(),oldObject->getGridY(),newObject,release);
-}
-
-SLGCGameUnit* SLGMEditorScene::getObjectAt(const QString& map, const QString& layer, int x, int y)
-{
-    Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
-    return getMap(map)->getObjectAt(layer,x,y);
+	game = new SLGCGame();
+	connect(game,SIGNAL(unitAdded(SLGCGameUnit*)),this,SLOT(onUnitAdded(SLGCGameUnit*)));
 }
 
 bool SLGMEditorScene::setActiveCharacter(MagicTowerCharacter* _activeCharacter)
@@ -81,10 +32,10 @@ bool SLGMEditorScene::setActiveMap(const QString& map)
     if(map==activeMap) return true;
     if(activeMap!="")
     {
-        this->maps[activeMap]->setActiveMap(false);
+		this->game->maps[activeMap]->setActiveMap(false);
     }
     activeMap = map;
-    this->maps[activeMap]->setActiveMap(true);
+	this->game->maps[activeMap]->setActiveMap(true);
     return true;
 }
 
@@ -96,12 +47,12 @@ MagicTowerCharacter* SLGMEditorScene::getActiveCharacter()
 void SLGMEditorScene::reset()
 {
     activeCharacter = NULL;
-	QMapIterator<QString, SLGCGameMap*> i(maps);
+	QMapIterator<QString, SLGCGameMap*> i(game->maps);
     while (i.hasNext()) {
         i.next();
         delete i.value();
     }
-    maps.clear();
+	game->maps.clear();
     activeMap = "";
 }
 
@@ -135,7 +86,16 @@ void SLGMEditorScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 	//Q_UNUSED(mouseEvent);
 }
 
-QList<QString> SLGMEditorScene::allMaps()
+SLGCGameUnit* SLGMEditorScene::setObjectAt(const QString& map, const QString& layer, const int gridX, const int gridY, SLGCGameUnit* object, bool release)
 {
-    return maps.keys();
+	SLGCGameUnit* unit = game->setObjectAt(map, layer,gridX,gridY,object,release);
+	/*if(object!=NULL)
+	{
+		addItem(object);
+	}*/
+}
+
+void SLGMEditorScene::onUnitAdded(SLGCGameUnit* unit)
+{
+	addItem(unit);
 }

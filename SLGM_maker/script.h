@@ -13,7 +13,8 @@
 #include "NPCDialogExtension.h"
 #include "MagicTowerLoader.h"
 #include "SaveLoadExtension.h"
-#include "SGLCGameMap.h"
+#include "SLGCGameMap.h"
+#include "SLGCGame.h"
 
 /**
  * @brief GeneralItemHandler is used to handle all Items that is used to increase or decrease some
@@ -38,7 +39,7 @@ public:
             currentCharacter->setGameProperty(appliedGameProperty,temp);
         }
         scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
-        scene->setObjectAt(obj->getMap(),obj->getLayer(),obj->getGridX(),obj->getGridY(),NULL);
+		scene->setObjectAt(obj->getMap(),obj->getLayer(),obj->getGridX(),obj->getGridY(),NULL);
         return false;
     }
 
@@ -100,12 +101,12 @@ public:
 		QString mapNext = targetMap;
         if(character == NULL) return;
 		// Maybe we need some more music here?
-        scene->setObjectAt(character, NULL, false);
-        scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
+		scene->game->setObjectAt(character, NULL, false);
+		scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
         scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
-		SLGCResourceManager::getInstance()->getAudio(scene->getMap(mapPrev)->backgroundMusic).stop();
-		SLGCResourceManager::getInstance()->getAudio(scene->getMap(mapNext)->backgroundMusic).play();
+		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapPrev)->backgroundMusic).stop();
+		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapNext)->backgroundMusic).play();
     }
     TransporterHandler(const QString& _targetMap, const QString& _targetLayer, int _targetX, int _targetY):
         targetMap(_targetMap),

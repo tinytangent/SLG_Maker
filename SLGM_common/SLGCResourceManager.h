@@ -9,7 +9,8 @@ class QString;
 class QPixmap;
 class QSoundEffect;
 /**
- * @brief PixmapPool类提供了一个图像缓存池，可以统一地加载位图并且通过一个字符串alias进行访问。
+ * @brief The SLGCResourceManager class manages all external resource that a game might be using,
+ * like images, audios, etc.
  */
 class SLGCResourceManager
 {

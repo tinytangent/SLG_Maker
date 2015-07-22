@@ -1,4 +1,4 @@
-#include "SGLCGameMap.h"
+#include "SLGCGameMap.h"
 #include "SLGCGameUnit.h"
 
 SLGCGameMap::SLGCGameMap(int _width, int _height)

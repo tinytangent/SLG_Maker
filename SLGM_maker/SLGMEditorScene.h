@@ -13,11 +13,14 @@ class SLGMObjectSelector;
 class SLGMMainWindow;
 class CharacterPropertyExtension;
 class SLGCGameMap;
+class SLGCGame;
 
 class SLGMEditorScene : public QGraphicsScene
 {
+	Q_OBJECT
+public:
+	SLGCGame* game;
 protected:
-
     /**
      * @brief parentWidget，MagicTowerScene创建时为自己创建的用于呈现自己的QGraphicsView对象
      */
@@ -25,7 +28,7 @@ protected:
     /**
      * @brief maps关联数组存储了魔塔中所有的地图（每一层是一张地图）
      */
-	QMap<QString, SLGCGameMap*> maps;
+	//QMap<QString, SLGCGameMap*> game->maps;
 
     /**
      * @brief activeCharacter表示魔塔当前的“活动”（受操纵的）人物。
@@ -55,36 +58,6 @@ public:
      * @return 指向游戏主窗口的指针
      */
     QGraphicsView* getParentWidget() ;
-
-    /**
-     * @brief addMap 添加一张地图
-     * @param name 地图名称
-     * @param width 地图宽度
-     * @param height 地图高度
-     * @return 是否添加成功
-     */
-    bool addMap(QString name, int width, int height);
-
-    /**
-     * @brief getMap 根据名称获取地图
-     * @param name
-     * @return
-     */
-	SLGCGameMap* getMap (const QString& name);
-    QList<QString> allMaps();
-
-    /**
-     * @brief addLayer像游戏场景添加一个图层
-     * @param map 要添加图层的地图名
-     * @param name 要添加图层的名称
-     * @return
-     */
-    bool addLayer(QString map, QString name);
-
-    //用于设置或者获取在某一处的对象
-    SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
-    SLGCGameUnit* setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release = true);
-    SLGCGameUnit* getObjectAt(const QString& map, const QString& layer, int x, int y);
 
     //设置当前的活动地图
     bool setActiveMap(const QString& map);
@@ -117,11 +90,15 @@ public:
      * @return 当前的活动人物，可能为NULL。
      */
     MagicTowerCharacter* getActiveCharacter();
+
+	SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
 protected:
     //鼠标移动事件，用于覆盖基类避免焦点对象被意外改变
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
 public:
 	SLGMEditorScene(QObject* parent = 0);
+public slots:
+	void onUnitAdded(SLGCGameUnit* unit);
 };
 
 #endif // MAGICTOWERSCENE_H

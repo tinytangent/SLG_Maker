@@ -129,8 +129,8 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         QStringList mapParts = str.split("/");
         if(mapParts.size()<=1) continue;
         QString mapName = mapParts[1];
-        scene->addMap(mapName,13,13);
-		SLGCGameMap* map = scene->getMap(mapName);
+		scene->game->addMap(mapName,13,13);
+		SLGCGameMap* map = scene->game->getMap(mapName);
         map->addLayer("character",200);
         map->addLayer("main",100);
         map->addLayer("ground",0);
@@ -144,11 +144,11 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
                 {
                     SLGCGameUnit* obj = new SLGCGameUnit();
                     obj->setPixmap("ground");
-                    scene->setObjectAt(mapName,"ground",j,i,obj);
+					scene->setObjectAt(mapName,"ground",j,i,obj);
 
                     obj = new MagicTowerPassiveObject();
                     obj->setPixmap("wall_brown");
-                    scene->setObjectAt(mapName,"main",j,i,obj);
+					scene->setObjectAt(mapName,"main",j,i,obj);
                 }
                 continue;
             }
@@ -159,12 +159,12 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
             {
                 SLGCGameUnit* obj = new SLGCGameUnit();
                 obj->setPixmap("ground");
-                scene->setObjectAt(mapName,"ground",j,i,obj);
+				scene->setObjectAt(mapName,"ground",j,i,obj);
                 if(j==0||j==12)
                 {
                     MagicTowerPassiveObject* obj = new MagicTowerPassiveObject();
                     obj->setPixmap("wall_brown");
-                    scene->setObjectAt(mapName,"main",j,i,obj);
+					scene->setObjectAt(mapName,"main",j,i,obj);
                 }
                 else
                 {
@@ -183,7 +183,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
                                                   .arg(mapLineParts[j-1]));
                         }
                     }
-                    scene->setObjectAt(mapName,"main",j,i,obj);
+					scene->setObjectAt(mapName,"main",j,i,obj);
                 }
             }
         }
@@ -378,8 +378,8 @@ bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& sav
     }
     QTextStream mapOutputStream(&mapFile);
     QTextStream extraOutputStream(&extraFile);
-    QStringList maps = scene->allMaps();
-    for(int i=0;i<maps.size();i++)
+	QStringList maps = scene->game->allMaps();
+	for(int i=0;i<maps.size();i++)
     {
         QString title = QString("[map/")+maps[i]+"]";
         mapOutputStream << title << "\r\n";
@@ -388,15 +388,15 @@ bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& sav
             QString line;
             for(int k=1;k<12;k++)
             {
-                if(scene->getObjectAt(maps[i],"main",k,j)!=NULL)
-                    line.append(scene->getObjectAt(maps[i],"main",k,j)->presetName);
+				if(scene->game->getObjectAt(maps[i],"main",k,j)!=NULL)
+					line.append(scene->game->getObjectAt(maps[i],"main",k,j)->presetName);
                 else
                     line.append("null");
                 if(k!=12)
                 {
                     line.append("|");
                 }
-                MagicTowerCharacter* character = dynamic_cast<MagicTowerCharacter*>(scene->getObjectAt(maps[i],"character",k,j));
+				MagicTowerCharacter* character = dynamic_cast<MagicTowerCharacter*>(scene->game->getObjectAt(maps[i],"character",k,j));
                 if(character!=NULL)
                 {
                     extraOutputStream << "[Character]" << "\r\n";
@@ -444,7 +444,7 @@ void MagicTowerLoader::loadSavedGame(const QString& directoryName, const QString
                     int y = parameters["y"].toInt();
                     scene->setObjectAt(map,"character",x,y,getPreset<MagicTowerCharacter>("warrior")->clone());
                     MagicTowerCharacter* character = dynamic_cast<MagicTowerCharacter*>(
-                                scene->getObjectAt(map,"character",x,y));
+								scene->game->getObjectAt(map,"character",x,y));
                     if(character!=NULL)
                     {
                         QMap<QString, QString>::const_iterator i = parameters.begin();
