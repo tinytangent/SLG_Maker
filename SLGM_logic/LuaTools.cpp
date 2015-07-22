@@ -43,3 +43,8 @@ void LuaTools::DumpGlobal()
 	lua_pop(LS,1);
 	return;
 }
+
+LuaTools::~LuaTools()
+{
+	delete LS;
+}

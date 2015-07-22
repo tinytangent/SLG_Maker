@@ -54,7 +54,7 @@ public:
 	* @param nId:要查询的单位的id; result:查询结果
 	* @return 0:成功查询; 1:不存在同id单位
 	*/
-	int QueryUnit(int nId, GameUnit* result);
+	int QueryUnit(int nId, GameUnit* &result);
 
 	/*
 	* @brief 设置父对象

@@ -1,5 +1,6 @@
 #include "lua.hpp"
 #include "LuaTools.h"
+#include "GameUnit.h"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -47,23 +48,23 @@ int main()
 
 	lua_close(LS);
 
-	int a; std::cin>>a;*/
+	int a; std::cin>>a;
 
 	LuaTools lt;
 	lt.Load("hello.lua");
-
-/*	lua_getglobal(lt.LS, "a");
-	int a = lua_tonumber(lt.LS, -1);
-
-	lua_getglobal(lt.LS, "b");
-	string b = lua_tostring(lt.LS, -1);
-
-	cout << a << b;*/
 	
-	lt.DumpGlobal();
-	
-	
-	//lt.DumpGlobal();
+	lt.DumpGlobal();*/
+
+	GameUnit* GU = new GameUnit(NULL, "hello", 0, 0);
+
+	string* s = new string;
+	int ret = GU->QueryProperty("b", s);
+	if (ret == 0)
+		cout << *s;
+	int* i = new int;
+	ret = GU->QueryProperty("a", i);
+	if (ret == 0)
+		cout << *i;
 
 	return 0;
 }

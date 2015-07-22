@@ -50,7 +50,7 @@ int GameLayerSquare::DeleteUnit(int nId, bool bDestroy)
 * @param nId:要查询的单位的id; result:查询结果
 * @return 0:成功查询; 1:不存在同id单位
 */
-int GameLayerSquare::QueryUnit(int nId, GameUnit* result)
+int GameLayerSquare::QueryUnit(int nId, GameUnit* &result)
 {
 	if (unit.count(nId) == 0)
 		return 1;

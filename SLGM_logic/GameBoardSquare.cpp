@@ -105,7 +105,7 @@ int GameBoardSquare::SetParent(Game* _parent)
 * @param sLayerName:要查询的层的名称; result:查询到的指针
 * @return 0: 1:没有该名称的层指向要查询的层的指针
 */
-int GameBoardSquare::QueryLayer(string sLayerName, GameLayerSquare* result)
+int GameBoardSquare::QueryLayer(string sLayerName, GameLayerSquare* &result)
 {
 	if (layer.count(sLayerName) == 0)
 		return 1;

@@ -55,7 +55,7 @@ public:
 	* @param sBoardName:要查询的GameBoardSquare的名称; result:查询结果
 	* @return 0:成功查询; 1:不存在同名GameBoardSquare
 	*/
-	int QueryGameBoardSquare(string sBoardName, GameBoardSquare* result);
+	int QueryGameBoardSquare(string sBoardName, GameBoardSquare* &result);
 };
 
 

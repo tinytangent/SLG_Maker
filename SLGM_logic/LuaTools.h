@@ -13,6 +13,8 @@ class LuaTools
 public:
 	lua_State *LS;
 
+	~LuaTools();
+
 public:
 	void Load(string _LuaFileName);
 
