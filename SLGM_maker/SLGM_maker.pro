@@ -6,7 +6,8 @@ debug:   DESTDIR = ../debug
 
 INCLUDEPATH += ../SLGM_common
 
-LIBS += -L../shared/debug -lSLGM_common
+debug: LIBS += -L../shared/debug -lSLGM_common
+release: LIBS += -L../shared/debug -lSLGM_common
 
 TARGET = SLGM_maker
 TEMPLATE = app

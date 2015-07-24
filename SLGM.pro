@@ -6,4 +6,5 @@ SUBDIRS += \
 	SLGM_logic \
 	SLGM_common \
 	SLGM_maker \
-	SLGM_player
+	SLGM_player \
+	Lua_5.3.1
