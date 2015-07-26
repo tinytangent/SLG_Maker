@@ -88,17 +88,6 @@ void SLGCGameUnit::setPixmapFrameAnimation(const QVector<AnimationFrame>& animat
     currentFrame = 0;
 }
 
-bool SLGCGameUnit::setGameProperty(const QString &name, int value)
-{
-    gameProperties[name] = value;
-    return true;
-}
-
-int SLGCGameUnit::getGameProperty(const QString& name)
-{
-    return gameProperties[name];
-}
-
 const QString& SLGCGameUnit::getLayer()
 {
     return layer;
@@ -132,9 +121,4 @@ SLGCGameUnit* SLGCGameUnit::clone()
     ret->currentFrame = this->currentFrame;
     ret->presetName = presetName;
     return ret;
-}
-
-const QMap<QString,int>& SLGCGameUnit::getAllGameProperties()
-{
-    return gameProperties;
 }

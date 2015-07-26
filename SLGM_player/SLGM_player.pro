@@ -5,9 +5,10 @@ release: DESTDIR = ../release
 debug:   DESTDIR = ../debug
 
 INCLUDEPATH += ../SLGM_common
+INCLUDEPATH += ../SLGM_logic
 
-debug: LIBS += -L../shared/debug -lSLGM_common
-release: LIBS += -L../shared/debug -lSLGM_common
+debug: LIBS += -L../shared/debug -lSLGM_common -lSLGM_logic
+release: LIBS += -L../shared/debug -lSLGM_common -lSLGM_logic
 
 TARGET = SLGM_player
 TEMPLATE = app

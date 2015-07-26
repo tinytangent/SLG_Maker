@@ -35,7 +35,7 @@ public:
 	QList<QString> allMaps();
 
 	/**
-	 * @brief addLayer像游戏场景添加一个图层
+	 * @brief addLayer adds a layer to an certain map in Game
 	 * @param map 要添加图层的地图名
 	 * @param name 要添加图层的名称
 	 * @return
@@ -43,6 +43,16 @@ public:
 	bool addLayer(const QString& map, const QString& name);
 
 	//用于设置或者获取在某一处的对象
+	/**
+	 * @brief setObjectAt
+	 * @param map
+	 * @param layer
+	 * @param x
+	 * @param y
+	 * @param obj
+	 * @param release
+	 * @return
+	 */
 	SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
 	SLGCGameUnit* setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release = true);
 	SLGCGameUnit* getObjectAt(const QString& map, const QString& layer, int x, int y);
@@ -51,6 +61,7 @@ protected:
 	QMap<QString, SLGCGameUnit*> unitPresets;
 	bool loadResource(const QString& fileName);
 	bool loadMap(const QString& fileName);
+	bool loadUnitPresetName(const QString& fileName);
 public:
 	SLGCGame();
 	~SLGCGame();
@@ -58,13 +69,11 @@ public:
 	bool saveProject(const QString& fileName);
 	bool exportGameExecutable(const QString& fileName);
 	void reset();
-	bool addObjectPreset();
 
 	//The following methods provide supports to Game Unit
 	bool addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset);
 	bool removeUnitPreset(const QString& presetName);
 	SLGCGameUnit* getUnitPreset(const QString& presetName);
-	//SLGCGameUnit* setUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset, bool release = true);
 
 	//The following methods provide supports to Game Object
 signals:
