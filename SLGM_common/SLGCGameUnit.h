@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVector>
 
+#include "SLGCGameBase.h"
 
 class SLGMEditorScene;
 class SLGCGameMap;
@@ -36,7 +37,7 @@ public:
     int y;
 };
 
-class SLGCGameUnit : public QGraphicsObject
+class SLGCGameUnit : public QGraphicsObject, public SLGCGameBase
 {
 	friend class SLGCGameMap;
     friend class SLGMEditorScene;
@@ -142,27 +143,6 @@ public:
      * @param animation
      */
     virtual void setPixmapFrameAnimation(const QVector<AnimationFrame>& animation);
-
-    /**
-     * @brief setGameProperty用于设置游戏中一个魔塔网格对象的属性，如果该属性不存在则会被创建。
-     * @param name 希望设置的属性的名字
-     * @param value 希望属性被设置的值
-     * @return 属性设置是否成功，目前总是返回true
-     */
-    virtual bool setGameProperty(const QString& name,int value);
-
-    /**
-     * @brief getGameProperty用于获取游戏中的一个魔塔网格对象属性。
-     * @param name 希望获取的属性的名称。
-     * @return 属性的值。注意如果属性没有被设置，会造成不可预期的结果。
-     */
-    virtual int getGameProperty(const QString& name);
-
-    /**
-     * @brief getAllGameProperties用于获取一个魔塔对象的全部属性
-     * @return 全部属性的值。
-     */
-    virtual const QMap<QString,int>& getAllGameProperties();
 
     /**
      * @brief setPresetName设置游戏对象预设属性的名称

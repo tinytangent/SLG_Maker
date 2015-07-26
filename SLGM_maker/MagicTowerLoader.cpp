@@ -403,7 +403,7 @@ bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& sav
                     extraOutputStream << "map = " << maps[i] << "\r\n";
                     extraOutputStream << "x = " << k << "\r\n";
                     extraOutputStream << "y = " << j << "\r\n";
-                    const QMap<QString,int>& properties = character->getAllGameProperties();
+					const QMap<QString,int>& properties = character->getAllIntGameProperties();
                     QMap<QString, int>::const_iterator i = properties.begin();
                     while(i != properties.end())
                     {

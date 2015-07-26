@@ -35,8 +35,8 @@ void NPCDialogExtension::keyPressEvent(QKeyEvent* event)
                 break;
             }
             NPCDialogPage& currentPage = dialogPages->currentPage();
-            int characterPropertyVal = magicTowerScene->getActiveCharacter()->getGameProperty(currentPage.costProperty);
-            int characterPurchasedPropertyVal = magicTowerScene->getActiveCharacter()->getGameProperty(
+            int characterPropertyVal = magicTowerScene->getActiveCharacter()->getIntGameProperty(currentPage.costProperty);
+            int characterPurchasedPropertyVal = magicTowerScene->getActiveCharacter()->getIntGameProperty(
                         currentPage.purchasedProperties[selectedOption]);
             characterPropertyVal -= currentPage.costValue;
             characterPurchasedPropertyVal += currentPage.purchasedValues[selectedOption];

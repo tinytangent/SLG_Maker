@@ -32,7 +32,7 @@ public:
         MagicTowerCharacter* currentCharacter = scene->getActiveCharacter();
         if(currentCharacter!=NULL)
         {
-            int temp = currentCharacter->getGameProperty(appliedGameProperty);
+			int temp = currentCharacter->getIntGameProperty(appliedGameProperty);
             temp += appliedPropertyDelta;
             if(temp<0) return false;
             currentCharacter->setGameProperty(appliedGameProperty,temp);

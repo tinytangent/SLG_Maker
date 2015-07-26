@@ -56,3 +56,18 @@ SLGCGameUnit* SLGCGame::getObjectAt(const QString& map, const QString& layer, in
 	Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
 	return getMap(map)->getObjectAt(layer,x,y);
 }
+
+bool SLGCGame::addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset)
+{
+
+}
+
+bool SLGCGame::removeUnitPreset(const QString& presetName)
+{
+
+}
+
+SLGCGameUnit* SLGCGame::getUnitPreset(const QString& presetName)
+{
+
+}

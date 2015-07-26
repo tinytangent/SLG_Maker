@@ -39,20 +39,20 @@ void CombatDialogExtension::paint(QPainter* painter, const QStyleOptionGraphicsI
     painter->setFont(textFont);
     painter->setPen(QPen(Qt::white));
     painter->setBrush(QBrush(Qt::white));
-    painter->drawText(QRect(0,40,200,100),QString("生命值:%1").arg(character->getGameProperty("hitPoint")));
-    painter->drawText(QRect(0,80,200,100),QString("攻击力:%1").arg(character->getGameProperty("attack")));
-    painter->drawText(QRect(0,120,200,100),QString("防御力:%1").arg(character->getGameProperty("defense")));
-    painter->drawText(QRect(200,40,200,100),QString("怪物生命值:%1").arg(monster->getGameProperty("hitPoint")));
-    painter->drawText(QRect(200,80,200,100),QString("怪物攻击力:%1").arg(monster->getGameProperty("attack")));
-    painter->drawText(QRect(200,120,200,100),QString("怪物防御力:%1").arg(monster->getGameProperty("defense")));
+	painter->drawText(QRect(0,40,200,100),QString("生命值:%1").arg(character->getIntGameProperty("hitPoint")));
+	painter->drawText(QRect(0,80,200,100),QString("攻击力:%1").arg(character->getIntGameProperty("attack")));
+	painter->drawText(QRect(0,120,200,100),QString("防御力:%1").arg(character->getIntGameProperty("defense")));
+	painter->drawText(QRect(200,40,200,100),QString("怪物生命值:%1").arg(monster->getIntGameProperty("hitPoint")));
+	painter->drawText(QRect(200,80,200,100),QString("怪物攻击力:%1").arg(monster->getIntGameProperty("attack")));
+	painter->drawText(QRect(200,120,200,100),QString("怪物防御力:%1").arg(monster->getIntGameProperty("defense")));
 }
 
 void CombatDialogExtension::onFightTimer()
 {
     if(nextFighter == 0)
     {
-        int characterAttack = character->getGameProperty("attack")-monster->getGameProperty("defense");
-        int monsterAttack = monster->getGameProperty("attack")-character->getGameProperty("defense");
+		int characterAttack = character->getIntGameProperty("attack")-monster->getIntGameProperty("defense");
+		int monsterAttack = monster->getIntGameProperty("attack")-character->getIntGameProperty("defense");
         if(characterAttack<=0)
         {
             if(monsterAttack<=0)
@@ -64,13 +64,13 @@ void CombatDialogExtension::onFightTimer()
                 characterAttack = 0;
             }
         }
-        int monsterHp = monster->getGameProperty("hitPoint") - characterAttack;
+		int monsterHp = monster->getIntGameProperty("hitPoint") - characterAttack;
         monster->setGameProperty("hitPoint", monsterHp);
         nextFighter = 1;
         if(monsterHp<=0)
         {
-            int gold = character->getGameProperty("gold");
-            gold += monster->getGameProperty("gold");
+			int gold = character->getIntGameProperty("gold");
+			gold += monster->getIntGameProperty("gold");
             character->setGameProperty("gold",gold);
 			magicTowerScene->setObjectAt(monster->getMap(),monster->getLayer(),monster->getGridX(),monster->getGridY(),NULL);
             hideDialog();
@@ -79,12 +79,12 @@ void CombatDialogExtension::onFightTimer()
     }
     else
     {
-        int monsterAttack = monster->getGameProperty("attack")-character->getGameProperty("defense");
+		int monsterAttack = monster->getIntGameProperty("attack")-character->getIntGameProperty("defense");
         if(monsterAttack <= 0)
         {
             monsterAttack = 0;
         }
-        int characterHp = character->getGameProperty("hitPoint")-monsterAttack;
+		int characterHp = character->getIntGameProperty("hitPoint")-monsterAttack;
         character->setGameProperty("hitPoint", characterHp);
         if(characterHp<=0)
         {
