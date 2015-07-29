@@ -9,17 +9,20 @@ INCLUDEPATH += ../SLGM_logic
 TARGET = SLGM_common
 TEMPLATE = lib
 CONFIG += staticlib
+CONFIG += create_prl
 
 HEADERS += \
     SLGCResourceManager.h \
     SLGCGame.h \
     SLGCGameUnit.h \
     SLGCGameMap.h \
-    SLGCGameBase.h
+    SLGCGameBase.h \
+    SLGCGameLoader.h
 
 SOURCES += \
     SLGCResourceManager.cpp \
     SGLCGame.cpp \
     SLGCGameUnit.cpp \
     SGLCGameMap.cpp \
-    SLGCGameBase.cpp
+    SLGCGameBase.cpp \
+    SLGCGameLoader.cpp

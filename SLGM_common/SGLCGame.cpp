@@ -1,6 +1,10 @@
 #include "SLGCGame.h"
 #include "SLGCGameMap.h"
 #include "SLGCGameUnit.h"
+#include <QXmlStreamReader>
+#include <QFile>
+
+#include <QDebug>
 
 SLGCGame::SLGCGame()
 {
@@ -68,6 +72,36 @@ bool SLGCGame::removeUnitPreset(const QString& presetName)
 }
 
 SLGCGameUnit* SLGCGame::getUnitPreset(const QString& presetName)
+{
+
+}
+
+bool SLGCGame::loadMap(const QString& fileName)
+{
+	QFile file(fileName);
+	if(!file.open(QIODevice::ReadOnly))
+	{
+		qDebug() << "Failed to open file";
+		return false;
+	}
+
+	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
+	qDebug() << "load Map called!";
+	QXmlStreamReader::TokenType tt;
+	while(!xmlDocument->atEnd())
+	{
+		if(xmlDocument->isStartElement())
+		{
+			qDebug() << xmlDocument->name();
+		}
+		xmlDocument->readNext();
+	}
+	delete xmlDocument;
+	file.close();
+	return true;
+}
+
+bool SLGCGame::saveMap(const QString& fileName)
 {
 
 }
