@@ -1,6 +1,7 @@
 #include "SLGCGame.h"
 #include "SLGCGameMap.h"
 #include "SLGCGameUnit.h"
+#include "SLGCGameLoader.h"
 #include <QXmlStreamReader>
 #include <QFile>
 
@@ -85,14 +86,16 @@ bool SLGCGame::loadMap(const QString& fileName)
 		return false;
 	}
 
+	SLGCGameLoader loader(this);
+	loader.loadMap(fileName);
 	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
-	qDebug() << "load Map called!";
+	//qDebug() << "load Map called!";
 	QXmlStreamReader::TokenType tt;
 	while(!xmlDocument->atEnd())
 	{
 		if(xmlDocument->isStartElement())
 		{
-			qDebug() << xmlDocument->name();
+			//qDebug() << xmlDocument->name();
 		}
 		xmlDocument->readNext();
 	}

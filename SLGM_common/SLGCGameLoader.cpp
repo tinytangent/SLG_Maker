@@ -1,5 +1,8 @@
 #include <QXmlStreamReader>
+#include <QFile>
+#include <QDebug>
 
+#include "SLGCGame.h"
 #include "SLGCGameLoader.h"
 
 SLGCGameLoader::SLGCGameLoader(SLGCGame *_game)
@@ -15,16 +18,17 @@ bool SLGCGameLoader::parseMapFile(QXmlStreamReader* reader)
 		if(reader->atEnd()) return false;
 		reader->readNext();
 	}
-	forever
+	while(!reader->atEnd())
 	{
-		if(reader->isStartElement())
+		if(reader->isStartElement() && reader->name()=="map")
 		{
-			if(reader->name()=="map")
-			{
-				parseMap(reader);
-			}
+			QString mapName = reader->attributes().value("name").toString();
+			game->addMap(mapName, 13, 13);
+			qDebug() << mapName;
 		}
+		reader->readNext();
 	}
+	return true;
 }
 
 bool SLGCGameLoader::parseMap(QXmlStreamReader* reader)
@@ -33,9 +37,33 @@ bool SLGCGameLoader::parseMap(QXmlStreamReader* reader)
 	{
 		return false;
 	}
+	reader->readNext();
+	forever
+	{
+		if(reader->isStartElement())
+		{
+			if(reader->name()=="layer")
+			{
+				parseMap(reader);
+			}
+		}
+	}
 }
 
 bool SLGCGameLoader::parseLayer(QXmlStreamReader* reader, const QString& mapName)
 {
 
+}
+
+bool SLGCGameLoader::loadMap(const QString& fileName)
+{
+	QFile file(fileName);
+	if(!file.open(QIODevice::ReadOnly))
+	{
+		return false;
+	}
+	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
+	parseMapFile(xmlDocument);
+	file.close();
+	delete xmlDocument;
 }

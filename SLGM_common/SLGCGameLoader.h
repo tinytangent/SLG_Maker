@@ -5,6 +5,10 @@ class SLGCGame;
 class QString;
 class QXmlStreamReader;
 
+/**
+ * @brief The SLGCGameLoader class is a helper class used to load a SLGMaker game project.
+ * An object of the SLGCGameLoader class is always associated with an object of SLGCCGame.
+ */
 class SLGCGameLoader
 {
 protected:

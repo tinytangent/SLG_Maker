@@ -129,7 +129,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         QStringList mapParts = str.split("/");
         if(mapParts.size()<=1) continue;
         QString mapName = mapParts[1];
-		scene->game->addMap(mapName,13,13);
+		//scene->game->addMap(mapName,13,13);
 		SLGCGameMap* map = scene->game->getMap(mapName);
         map->addLayer("character",200);
         map->addLayer("main",100);
