@@ -41,7 +41,7 @@ public:
 	 * @param name 要添加图层的名称
 	 * @return
 	 */
-	bool addLayer(const QString& map, const QString& name);
+	bool addLayer(const QString& map, const QString& name, int zOrder);
 
 	/**
 	 * @brief setObjectAt

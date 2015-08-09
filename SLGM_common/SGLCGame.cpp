@@ -108,3 +108,8 @@ bool SLGCGame::saveMap(const QString& fileName)
 {
 
 }
+
+bool SLGCGame::addLayer(const QString& map, const QString& name, int zOrder)
+{
+	getMap(map)->addLayer(name, zOrder);
+}

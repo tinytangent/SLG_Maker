@@ -19,6 +19,8 @@ protected:
 public:
 	SLGCGameLoader(SLGCGame* _game);
 	bool loadMap(const QString& fileName);
+signals:
+
 };
 
 #endif // SLGCGAMELOADER_H

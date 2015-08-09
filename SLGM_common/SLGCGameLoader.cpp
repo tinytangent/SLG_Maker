@@ -23,7 +23,7 @@ bool SLGCGameLoader::parseMapFile(QXmlStreamReader* reader)
 		if(reader->isStartElement() && reader->name()=="map")
 		{
 			QString mapName = reader->attributes().value("name").toString();
-			game->addMap(mapName, 13, 13);
+			parseMap(reader);
 			qDebug() << mapName;
 		}
 		reader->readNext();
@@ -37,22 +37,29 @@ bool SLGCGameLoader::parseMap(QXmlStreamReader* reader)
 	{
 		return false;
 	}
-	reader->readNext();
-	forever
+	QString mapName = reader->attributes().value("name").toString();
+	game->addMap(mapName, 13, 13);
+	while(!reader->atEnd())
 	{
-		if(reader->isStartElement())
+		if(reader->isStartElement() && reader->name()=="layer")
 		{
-			if(reader->name()=="layer")
-			{
-				parseMap(reader);
-			}
+			QString layerName = reader->attributes().value("name").toString();
+			parseLayer(reader, mapName);
 		}
+		if(reader->isEndElement() && reader->name()=="map") return true;
+		reader->readNext();
 	}
+	return false;
 }
 
 bool SLGCGameLoader::parseLayer(QXmlStreamReader* reader, const QString& mapName)
 {
-
+	if((!reader->isStartElement())||(reader->name()!="layer"))
+		return false;
+	QString layerName = reader->attributes().value("name").toString();
+	int zOrder = reader->attributes().value("z-order").toInt();
+	game->addLayer(mapName, layerName, zOrder);
+				qDebug() << mapName << ".." << layerName;
 }
 
 bool SLGCGameLoader::loadMap(const QString& fileName)
