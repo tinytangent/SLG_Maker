@@ -131,14 +131,14 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         QString mapName = mapParts[1];
 		//scene->game->addMap(mapName,13,13);
 
-		//TODO : This is a temporary hack! will not use
+		//TODO : This is a temporary hack! will be removed in the future!
 		SLGCGameMap* map = scene->game->getMap(mapName);
         map->addLayer("character",200);
 		//map->addLayer("main",100);
         map->addLayer("ground",0);
 
 		QString musicLine = mapFileStream.readLine();
-		map->backgroundMusic = musicLine.trimmed();
+		//map->backgroundMusic = musicLine.trimmed();
         for(int i=0;i<13;i++)
         {
             if(i==0||i==12)

@@ -25,6 +25,7 @@ public:
 	bool getGameProperty(const QString& name, QString& value);
 	bool getGameProperty(const QString& name, int& value);
 	int getIntGameProperty(const QString& name);
+	QString getStringGameProperty(const QString& name);
 	QMap<QString, QString> getAllStringGameProperties();
 	QMap<QString, int> getAllIntGameProperties();
 };

@@ -3,6 +3,8 @@
 #include <QDebug>
 
 #include "SLGCGame.h"
+#include "SLGCGameBase.h"
+#include "SLGCGameMap.h"
 #include "SLGCGameLoader.h"
 
 SLGCGameLoader::SLGCGameLoader(SLGCGame *_game)
@@ -46,6 +48,10 @@ bool SLGCGameLoader::parseMap(QXmlStreamReader* reader)
 			QString layerName = reader->attributes().value("name").toString();
 			parseLayer(reader, mapName);
 		}
+		else if(reader->isStartElement() && reader->name()=="property")
+		{
+			parseProperty(reader, game->getMap(mapName));
+		}
 		if(reader->isEndElement() && reader->name()=="map") return true;
 		reader->readNext();
 	}
@@ -73,4 +79,21 @@ bool SLGCGameLoader::loadMap(const QString& fileName)
 	parseMapFile(xmlDocument);
 	file.close();
 	delete xmlDocument;
+}
+
+bool SLGCGameLoader::parseProperty(QXmlStreamReader* reader, SLGCGameBase* obj)
+{
+	if((!reader->isStartElement())||(reader->name()!="property"))
+		return false;
+	QString propertyName = reader->attributes().value("name").toString();
+	QString propertyType = reader->attributes().value("type").toString();
+	QString propertyValue = reader->attributes().value("value").toString();
+	if(propertyType=="string")
+	{
+		obj->addGameProperty(propertyName,propertyValue);
+	}
+	else if(propertyType=="integer")
+	{
+		obj->addGameProperty(propertyName,propertyValue.toInt());
+	}
 }

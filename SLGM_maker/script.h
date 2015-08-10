@@ -105,8 +105,10 @@ public:
 		scene->setObjectAt(targetMap, targetLayer, targetX, targetY, character);
         scene->setActiveCharacter(character);
         scene->getExtension<CharacterPropertyExtension>("characterProperty")->update();
-		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapPrev)->backgroundMusic).stop();
-		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapNext)->backgroundMusic).play();
+		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapPrev)
+													 ->getStringGameProperty("background_music")).stop();
+		SLGCResourceManager::getInstance()->getAudio(scene->game->getMap(mapNext)
+													 ->getStringGameProperty("background_music")).play();
     }
     TransporterHandler(const QString& _targetMap, const QString& _targetLayer, int _targetX, int _targetY):
         targetMap(_targetMap),

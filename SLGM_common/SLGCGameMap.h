@@ -3,9 +3,11 @@
 
 #include <QMap>
 
+#include "SLGCGameBase.h"
+
 class SLGCGameUnit;
 
-class SLGCGameMap
+class SLGCGameMap : public SLGCGameBase
 {
 public:
 	/**
