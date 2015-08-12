@@ -9,7 +9,7 @@
 
 SLGCGame::SLGCGame()
 {
-
+	loader = new SLGCGameLoader(this);
 }
 
 SLGCGame::~SLGCGame()
@@ -64,17 +64,20 @@ SLGCGameUnit* SLGCGame::getObjectAt(const QString& map, const QString& layer, in
 
 bool SLGCGame::addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset)
 {
-
+	//TODO not implemented
+	return false;
 }
 
 bool SLGCGame::removeUnitPreset(const QString& presetName)
 {
-
+	//TODO not implemented.
+	return false;
 }
 
 SLGCGameUnit* SLGCGame::getUnitPreset(const QString& presetName)
 {
-
+	//TODO not implemented.
+	return NULL;
 }
 
 bool SLGCGame::loadMap(const QString& fileName)
@@ -86,8 +89,7 @@ bool SLGCGame::loadMap(const QString& fileName)
 		return false;
 	}
 
-	SLGCGameLoader loader(this);
-	loader.loadMap(fileName);
+	loader->loadMap(fileName);
 	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
 	//qDebug() << "load Map called!";
 	QXmlStreamReader::TokenType tt;
@@ -106,7 +108,7 @@ bool SLGCGame::loadMap(const QString& fileName)
 
 bool SLGCGame::saveMap(const QString& fileName)
 {
-
+	return false;
 }
 
 bool SLGCGame::addLayer(const QString& map, const QString& name, int zOrder)

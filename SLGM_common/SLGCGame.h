@@ -6,6 +6,7 @@
 
 class SLGCGameUnit;
 class SLGCGameMap;
+class SLGCGameLoader;
 class QXmlStreamReader;
 
 /**
@@ -17,6 +18,7 @@ class SLGCGame : public QObject
 {
 	Q_OBJECT
 public:
+	SLGCGameLoader* loader;
 	QMap<QString, SLGCGameMap*> maps;
 	/**
 	 * @brief addMap 添加一张地图
@@ -83,7 +85,7 @@ public:
 	//The following methods provide supports to Game Object
 signals:
 	void unitAdded(SLGCGameUnit* unit);
-	void mapUnitSet(const QString& map, const QString& layer, const int x, const int y, const QString& presetName);
+	void mapUnitSet(QString map, QString layer, const int x, const int y, QString presetName);
 };
 
 
