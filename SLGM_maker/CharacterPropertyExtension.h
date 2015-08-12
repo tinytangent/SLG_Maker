@@ -8,7 +8,7 @@ class CharacterPropertyExtension : public MagicTowerExtension
     Q_OBJECT
 protected:
     //显示使用的字体
-    QFont textFont;
+	QFont textFont;
 public:
 
     //构造函数

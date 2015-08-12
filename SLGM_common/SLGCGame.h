@@ -6,6 +6,8 @@
 
 class SLGCGameUnit;
 class SLGCGameMap;
+class SLGCGameLoader;
+class QXmlStreamReader;
 
 /**
  * @brief The SLGCGame class store complete information used to describe a game
@@ -16,6 +18,7 @@ class SLGCGame : public QObject
 {
 	Q_OBJECT
 public:
+	SLGCGameLoader* loader;
 	QMap<QString, SLGCGameMap*> maps;
 	/**
 	 * @brief addMap 添加一张地图
@@ -40,9 +43,8 @@ public:
 	 * @param name 要添加图层的名称
 	 * @return
 	 */
-	bool addLayer(const QString& map, const QString& name);
+	bool addLayer(const QString& map, const QString& name, int zOrder);
 
-	//用于设置或者获取在某一处的对象
 	/**
 	 * @brief setObjectAt
 	 * @param map
@@ -60,13 +62,13 @@ protected:
 	//QMap<QString, SLGCGameObject*> objectPresets;
 	QMap<QString, SLGCGameUnit*> unitPresets;
 	bool loadResource(const QString& fileName);
-	bool loadMap(const QString& fileName);
 	bool loadUnitPresetName(const QString& fileName);
 public:
 	SLGCGame();
 	~SLGCGame();
 	bool loadProject(const QString& fileName);
 	bool saveProject(const QString& fileName);
+	bool loadMap(const QString& fileName);
 	bool exportGameExecutable(const QString& fileName);
 	void reset();
 
@@ -74,10 +76,16 @@ public:
 	bool addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset);
 	bool removeUnitPreset(const QString& presetName);
 	SLGCGameUnit* getUnitPreset(const QString& presetName);
-
+protected:
+	bool parseMapData(QXmlStreamReader* reader);
+	bool parseMap(QXmlStreamReader* reader);
+	bool parseLayer(QXmlStreamReader* reader);
+public:
+	bool saveMap(const QString& fileName);
 	//The following methods provide supports to Game Object
 signals:
 	void unitAdded(SLGCGameUnit* unit);
+	void mapUnitSet(QString map, QString layer, const int x, const int y, QString presetName);
 };
 
 

@@ -2,14 +2,17 @@
 #define MAGICTOWERLOADER_H
 
 #include <QMap>
+#include <QObject>
 #include <QDebug>
 
 class SLGMEditorScene;
 class QString;
 
-class MagicTowerLoader
+class MagicTowerLoader : public QObject
 {
+	Q_OBJECT
 protected:
+	QString gamePath;
     //与加载器关联的场景对象
     SLGMEditorScene* scene;
 
@@ -82,6 +85,8 @@ public:
 	QMap<QString, QObject*>& allPresets();
     //析构函数，用于释放资源。
     ~MagicTowerLoader();
+public slots:
+	void onMapChanged(QString mapName, QString layerName, const int x, const int y, QString presetName);
 };
 
 #endif // MAGICTOWERLOADER_H

@@ -14,7 +14,7 @@ using namespace std;
 */
 class GameBase
 {
-private:
+protected:
 	//属于自身的事件
 	map<int,GameEvent*> event;
 

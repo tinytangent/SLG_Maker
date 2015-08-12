@@ -19,6 +19,12 @@ bool SLGCGameBase::addGameProperty(const QString& name, const QString& value)
 	return AddProperty(name.toStdString(), value.toStdString()) == 0;
 }
 
+bool SLGCGameBase::addGameProperty(const QString& name, const int value)
+{
+	if(name.isEmpty()) return false;
+	return AddProperty(name.toStdString(), value)==0;
+}
+
 bool SLGCGameBase::deleteGameProperty(const QString& name)
 {
 	if(name.isEmpty()) return false;
@@ -84,6 +90,13 @@ bool SLGCGameBase::getGameProperty(const QString& name, int& value)
 int SLGCGameBase::getIntGameProperty(const QString& name)
 {
 	int ret = 0;
+	getGameProperty(name, ret);
+	return ret;
+}
+
+QString SLGCGameBase::getStringGameProperty(const QString& name)
+{
+	QString ret;
 	getGameProperty(name, ret);
 	return ret;
 }

@@ -1,10 +1,15 @@
 #include "SLGCGame.h"
 #include "SLGCGameMap.h"
 #include "SLGCGameUnit.h"
+#include "SLGCGameLoader.h"
+#include <QXmlStreamReader>
+#include <QFile>
+
+#include <QDebug>
 
 SLGCGame::SLGCGame()
 {
-
+	loader = new SLGCGameLoader(this);
 }
 
 SLGCGame::~SLGCGame()
@@ -59,15 +64,54 @@ SLGCGameUnit* SLGCGame::getObjectAt(const QString& map, const QString& layer, in
 
 bool SLGCGame::addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset)
 {
-
+	//TODO not implemented
+	return false;
 }
 
 bool SLGCGame::removeUnitPreset(const QString& presetName)
 {
-
+	//TODO not implemented.
+	return false;
 }
 
 SLGCGameUnit* SLGCGame::getUnitPreset(const QString& presetName)
 {
+	//TODO not implemented.
+	return NULL;
+}
 
+bool SLGCGame::loadMap(const QString& fileName)
+{
+	QFile file(fileName);
+	if(!file.open(QIODevice::ReadOnly))
+	{
+		qDebug() << "Failed to open file";
+		return false;
+	}
+
+	loader->loadMap(fileName);
+	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
+	//qDebug() << "load Map called!";
+	QXmlStreamReader::TokenType tt;
+	while(!xmlDocument->atEnd())
+	{
+		if(xmlDocument->isStartElement())
+		{
+			//qDebug() << xmlDocument->name();
+		}
+		xmlDocument->readNext();
+	}
+	delete xmlDocument;
+	file.close();
+	return true;
+}
+
+bool SLGCGame::saveMap(const QString& fileName)
+{
+	return false;
+}
+
+bool SLGCGame::addLayer(const QString& map, const QString& name, int zOrder)
+{
+	getMap(map)->addLayer(name, zOrder);
 }

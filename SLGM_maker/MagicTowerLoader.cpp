@@ -5,6 +5,7 @@
 #include <QString>
 #include <QMessageBox>
 #include "MagicTowerLoader.h"
+#include "SLGCGameLoader.h"
 #include "SLGCResourceManager.h"
 #include "script.h"
 
@@ -111,7 +112,9 @@ void MagicTowerLoader::loadPreset(const QString& presetFileName)
 
 void MagicTowerLoader::loadMap(const QString &mapPath)
 {
-    QFile mapFile(mapPath);
+	connect(scene->game->loader,SIGNAL(mapChanged(QString,QString,int,int,QString)),this,SLOT(onMapChanged(QString,QString,int,int,QString)));
+	scene->game->loadMap(gamePath + "/map.xml");
+	QFile mapFile(mapPath);
     mapFile.open(QFile::ReadOnly);
     QTextStream mapFileStream(&mapFile);
     QString sectionName;
@@ -129,13 +132,16 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         QStringList mapParts = str.split("/");
         if(mapParts.size()<=1) continue;
         QString mapName = mapParts[1];
-		scene->game->addMap(mapName,13,13);
+		//scene->game->addMap(mapName,13,13);
+
+		//TODO : This is a temporary hack! will be removed in the future!
 		SLGCGameMap* map = scene->game->getMap(mapName);
         map->addLayer("character",200);
-        map->addLayer("main",100);
+		//map->addLayer("main",100);
         map->addLayer("ground",0);
+
 		QString musicLine = mapFileStream.readLine();
-		map->backgroundMusic = musicLine.trimmed();
+		//map->backgroundMusic = musicLine.trimmed();
         for(int i=0;i<13;i++)
         {
             if(i==0||i==12)
@@ -148,7 +154,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
 
                     obj = new MagicTowerPassiveObject();
                     obj->setPixmap("wall_brown");
-					scene->setObjectAt(mapName,"main",j,i,obj);
+					//scene->setObjectAt(mapName,"main",j,i,obj);
                 }
                 continue;
             }
@@ -164,7 +170,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
                 {
                     MagicTowerPassiveObject* obj = new MagicTowerPassiveObject();
                     obj->setPixmap("wall_brown");
-					scene->setObjectAt(mapName,"main",j,i,obj);
+					//scene->setObjectAt(mapName,"main",j,i,obj);
                 }
                 else
                 {
@@ -183,7 +189,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
                                                   .arg(mapLineParts[j-1]));
                         }
                     }
-					scene->setObjectAt(mapName,"main",j,i,obj);
+					//scene->setObjectAt(mapName,"main",j,i,obj);
                 }
             }
         }
@@ -199,7 +205,7 @@ bool MagicTowerLoader::addPresetPassiveObject(const QMap<QString,QString>& param
     if(parameters.find("pixmap")!=parameters.end())
     {
 		if(SLGCResourceManager::getInstance()->getPixmap(parameters["pixmap"]).isNull())
-        {
+		{
             QMessageBox::critical(NULL,QString("警告"),
                                      QString("警告：预设%1试图引用未加载的资源文件。\n"
                                              "引用的位图资源%2不存在。\n"
@@ -343,9 +349,10 @@ bool MagicTowerLoader::addPresetCharacter(const QMap<QString, QString> &paramete
     return true;
 }
 
-void MagicTowerLoader::loadGame(const QString& gamePath)
+void MagicTowerLoader::loadGame(const QString& _gamePath)
 {
 	SLGCResourceManager::init();
+	gamePath = _gamePath;
     loadResource(gamePath+"/res");
     loadPreset(gamePath + "/startup.mtpreset.ini");
 }
@@ -484,4 +491,12 @@ void MagicTowerLoader::loadSavedGame(const QString& directoryName, const QString
 QMap<QString, QObject*>& MagicTowerLoader::allPresets()
 {
 	return objectPreset;
+}
+
+void MagicTowerLoader::onMapChanged(QString mapName, QString layerName, const int x, const int y, QString presetName)
+{
+	qDebug() << "This is called";
+	MagicTowerPassiveObject* obj = this->getPreset<MagicTowerPassiveObject>(presetName);
+	if(obj!=NULL)
+	scene->setObjectAt(mapName, layerName, x, y, obj->clone());
 }

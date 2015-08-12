@@ -10,6 +10,8 @@ INCLUDEPATH += ../SLGM_logic
 debug: LIBS += -L../shared/debug -lSLGM_common -lSLGM_logic
 release: LIBS += -L../shared/debug -lSLGM_common -lSLGM_logic
 
+CONFIG += ordered
+
 TARGET = SLGM_maker
 TEMPLATE = app
 SOURCES += \
