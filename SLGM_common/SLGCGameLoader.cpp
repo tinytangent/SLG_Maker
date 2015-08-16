@@ -1,12 +1,13 @@
 #include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 #include <QFile>
-#include <QString>
 #include <QDebug>
 
 #include "SLGCGame.h"
 #include "SLGCGameBase.h"
 #include "SLGCGameMap.h"
 #include "SLGCGameLoader.h"
+#include "SLGCGameUnit.h"
 
 SLGCGameLoader::SLGCGameLoader(SLGCGame *_game)
 {
@@ -101,19 +102,6 @@ bool SLGCGameLoader::parseLayer(QXmlStreamReader* reader, const QString& mapName
 	return false;
 }
 
-bool SLGCGameLoader::loadMap(const QString& fileName)
-{
-	QFile file(fileName);
-	if(!file.open(QIODevice::ReadOnly))
-	{
-		return false;
-	}
-	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
-	parseMapFile(xmlDocument);
-	file.close();
-	delete xmlDocument;
-}
-
 bool SLGCGameLoader::parseProperty(QXmlStreamReader* reader, SLGCGameBase* obj)
 {
 	if((!reader->isStartElement())||(reader->name()!="property"))
@@ -124,10 +112,109 @@ bool SLGCGameLoader::parseProperty(QXmlStreamReader* reader, SLGCGameBase* obj)
 	if(propertyType=="string")
 	{
 		obj->addGameProperty(propertyName,propertyValue);
+		return true;
 	}
 	else if(propertyType=="integer")
 	{
 		obj->addGameProperty(propertyName,propertyValue.toInt());
+		return true;
 	}
+	return false;
+}
+
+bool SLGCGameLoader::loadMapFile(const QString& fileName)
+{
+	QFile file(fileName);
+	if(!file.open(QIODevice::ReadOnly))
+	{
+		return false;
+	}
+	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
+	bool ret = parseMapFile(xmlDocument);
+	file.close();
+	delete xmlDocument;
+	return ret;
+}
+
+bool SLGCGameLoader::writeMapFile(QXmlStreamWriter* writer)
+{
+	writer->setAutoFormatting(true);
+	writer->writeStartDocument();
+	writer->writeStartElement("map_data");
+	QList<QString> maps = game->allMaps();
+	for(int i=0;i<maps.size();i++)
+	{
+		writeMap(writer, maps[i]);
+	}
+	writer->writeEndElement();
+	writer->writeEndDocument();
+	return true;
+}
+
+bool SLGCGameLoader::writeProperties(QXmlStreamWriter* writer, SLGCGameBase* obj)
+{
+	QMap<QString, int> intProperties = obj->getAllIntGameProperties();
+	QMap<QString, QString> stringProperties = obj->getAllStringGameProperties();
+	foreach(const QString& propertyName, intProperties.keys())
+	{
+		writer->writeStartElement("property");
+		writer->writeAttribute("name",propertyName);
+		writer->writeAttribute("type","integer");
+		writer->writeAttribute("value",QString("%1").arg(intProperties[propertyName]));
+		writer->writeEndElement();
+	}
+	foreach(const QString& propertyName, stringProperties.keys())
+	{
+		writer->writeStartElement("property");
+		writer->writeAttribute("name",propertyName);
+		writer->writeAttribute("type","string");
+		writer->writeAttribute("value",stringProperties[propertyName]);
+		writer->writeEndElement();
+	}
+	return false;
+}
+
+bool SLGCGameLoader::writeMap(QXmlStreamWriter* writer, const QString& mapName)
+{
+	SLGCGameMap* map = game->getMap(mapName);
+	writer->writeStartElement("map");
+	writer->writeAttribute("name",mapName);
+	writer->writeAttribute("width",QString("%1").arg(map->width));
+	writer->writeAttribute("height",QString("%1").arg(map->height));
+	writeProperties(writer,game->getMap(mapName));
+	QList<QString> layers = game->allLayers(mapName);
+	foreach (const QString& layerName, layers)
+	{
+		writer->writeStartElement("layer");
+		writer->writeAttribute("name",layerName);
+		writer->writeStartElement("layer_content");
+		for(int i=0;i<map->height;i++)
+		{
+			for(int j=0;j<map->width;j++)
+			{
+				SLGCGameUnit* unit = game->getObjectAt(mapName,layerName,j,i);
+				if(unit!=NULL) writer->writeCharacters(unit->presetName);
+				else writer->writeCharacters("@null");
+				if(i!=map->height-1||j!=map->width-1) writer->writeCharacters(",");
+			}
+		}
+		writer->writeEndElement();
+		writer->writeEndElement();
+	}
+	writer->writeEndElement();
+	return true;
+}
+
+bool SLGCGameLoader::saveMapFile(const QString& fileName)
+{
+	QFile file(fileName);
+	if(!file.open(QIODevice::WriteOnly))
+	{
+		return false;
+	}
+	QXmlStreamWriter writer(&file);
+	bool ret = writeMapFile(&writer);
+	file.close();
+	return ret;
 }
 

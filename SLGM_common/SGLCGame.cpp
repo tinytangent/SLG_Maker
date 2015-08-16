@@ -89,7 +89,7 @@ bool SLGCGame::loadMap(const QString& fileName)
 		return false;
 	}
 
-	loader->loadMap(fileName);
+	loader->loadMapFile(fileName);
 	QXmlStreamReader *xmlDocument = new QXmlStreamReader(&file);
 	//qDebug() << "load Map called!";
 	QXmlStreamReader::TokenType tt;
@@ -113,5 +113,12 @@ bool SLGCGame::saveMap(const QString& fileName)
 
 bool SLGCGame::addLayer(const QString& map, const QString& name, int zOrder)
 {
+	//TODO : handle duplicate layer names.
 	getMap(map)->addLayer(name, zOrder);
+	return true;
+}
+
+QList<QString> SLGCGame::allLayers(const QString& mapName)
+{
+	return this->getMap(mapName)->layers.keys();
 }

@@ -196,6 +196,7 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
         if(mapFileStream.atEnd()) break;
     }
     mapFile.close();
+	scene->game->loader->saveMapFile(gamePath + "/map_nxt.xml");
 }
 
 bool MagicTowerLoader::addPresetPassiveObject(const QMap<QString,QString>& parameters)
