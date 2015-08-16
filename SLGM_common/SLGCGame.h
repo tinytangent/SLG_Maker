@@ -35,7 +35,19 @@ public:
 	 * @return
 	 */
 	SLGCGameMap* getMap (const QString& name);
+
+	/**
+	 * @brief allMaps function can be used to get all existing maps in the game.
+	 * @return The list of all existing maps in the game.
+	 */
 	QList<QString> allMaps();
+
+	/**
+	 * @brief allLayers function can be used to get all existing layers in a specific map.
+	 * @param mapName The name of the map you want to get names of its all layer
+	 * @return The list of all existing layers in the map.
+	 */
+	QList<QString> allLayers(const QString& mapName);
 
 	/**
 	 * @brief addLayer adds a layer to an certain map in Game
