@@ -42,7 +42,9 @@ bool SLGCGameLoader::parseMap(QXmlStreamReader* reader)
 		return false;
 	}
 	QString mapName = reader->attributes().value("name").toString();
-	game->addMap(mapName, 13, 13);
+	int mapWidth = reader->attributes().value("width").toInt();
+	int mapHeight = reader->attributes().value("height").toInt();
+	game->addMap(mapName, mapWidth, mapHeight);
 	while(!reader->atEnd())
 	{
 		if(reader->isStartElement() && reader->name()=="layer")
@@ -74,25 +76,15 @@ bool SLGCGameLoader::parseLayer(QXmlStreamReader* reader, const QString& mapName
 			reader->readNext();
 			QString origMapData = reader->text().toString();
 			QStringList mapPartList = origMapData.split(",");
-			qDebug()<<mapPartList.size();
 			int mapPos = 0;
 			SLGCGameMap* currentMap = game->getMap(mapName);
 			for(int i=0;i<currentMap->width;i++)
 			{
 				for(int j=0;j<currentMap->height;j++)
 				{
-					//TODO:this is a temporary hack!
-					if(i==0||i==12||j==0||j==12)
-					{
-						emit mapChanged(mapName, layerName, j, i, "null");
-					}
-					else
-					{
-						QString presetName =  mapPartList[mapPos].trimmed();
-						qDebug() << "##" <<mapPos << presetName;
-						emit mapChanged(mapName, layerName, j, i, presetName);
-						mapPos++;
-					}
+					QString presetName =  mapPartList[mapPos].trimmed();
+					emit mapChanged(mapName, layerName, j, i, presetName);
+					mapPos++;
 				}
 			}
 		}

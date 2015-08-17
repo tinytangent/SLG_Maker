@@ -114,89 +114,6 @@ void MagicTowerLoader::loadMap(const QString &mapPath)
 {
 	connect(scene->game->loader,SIGNAL(mapChanged(QString,QString,int,int,QString)),this,SLOT(onMapChanged(QString,QString,int,int,QString)));
 	scene->game->loadMap(gamePath + "/map.xml");
-	QFile mapFile(mapPath);
-    mapFile.open(QFile::ReadOnly);
-    QTextStream mapFileStream(&mapFile);
-    QString sectionName;
-    QMap<QString, QString> parameters;
-    for(;;)
-    {
-        QString str = mapFileStream.readLine();
-        str = str.trimmed();
-        if(str.startsWith("[")&&str.endsWith("]"))
-        {
-            str[0] = QChar(' ');
-            str[str.size()-1] = QChar(' ');
-            str = str.trimmed();
-        }
-        QStringList mapParts = str.split("/");
-        if(mapParts.size()<=1) continue;
-        QString mapName = mapParts[1];
-		//scene->game->addMap(mapName,13,13);
-
-		//TODO : This is a temporary hack! will be removed in the future!
-		SLGCGameMap* map = scene->game->getMap(mapName);
-        map->addLayer("character",200);
-		//map->addLayer("main",100);
-        map->addLayer("ground",0);
-
-		QString musicLine = mapFileStream.readLine();
-		//map->backgroundMusic = musicLine.trimmed();
-        for(int i=0;i<13;i++)
-        {
-            if(i==0||i==12)
-            {
-                for(int j=0;j<13;j++)
-                {
-                    SLGCGameUnit* obj = new SLGCGameUnit();
-                    obj->setPixmap("ground");
-					scene->setObjectAt(mapName,"ground",j,i,obj);
-
-                    obj = new MagicTowerPassiveObject();
-                    obj->setPixmap("wall_brown");
-					//scene->setObjectAt(mapName,"main",j,i,obj);
-                }
-                continue;
-            }
-            qDebug()<<i;
-            QString mapLine = mapFileStream.readLine();
-            QStringList mapLineParts = mapLine.split("|");
-            for(int j=0;j<13;j++)
-            {
-                SLGCGameUnit* obj = new SLGCGameUnit();
-                obj->setPixmap("ground");
-				scene->setObjectAt(mapName,"ground",j,i,obj);
-                if(j==0||j==12)
-                {
-                    MagicTowerPassiveObject* obj = new MagicTowerPassiveObject();
-                    obj->setPixmap("wall_brown");
-					//scene->setObjectAt(mapName,"main",j,i,obj);
-                }
-                else
-                {
-                    MagicTowerPassiveObject* obj = NULL;
-                    if(mapLineParts[j-1] != "" && mapLineParts[j-1]!="null" && mapLineParts[j-1]!="void")
-                    {
-                        if(getPreset<MagicTowerPassiveObject>(mapLineParts[j-1])!=NULL)
-                        {
-                            obj = (MagicTowerPassiveObject*)getPreset<MagicTowerPassiveObject>(mapLineParts[j-1])->clone();
-                        }
-                        else
-                        {
-                            QMessageBox::critical(NULL,QString("警告"),
-                                                     QString("警告：游戏地图中指定了无效对象预设%1。\n"
-                                                             "应用程序将继续，但这些对象的丢失可能影响游戏体验。")
-                                                  .arg(mapLineParts[j-1]));
-                        }
-                    }
-					//scene->setObjectAt(mapName,"main",j,i,obj);
-                }
-            }
-        }
-        if(mapFileStream.atEnd()) break;
-    }
-    mapFile.close();
-	scene->game->loader->saveMapFile(gamePath + "/map_nxt.xml");
 }
 
 bool MagicTowerLoader::addPresetPassiveObject(const QMap<QString,QString>& parameters)
@@ -496,7 +413,28 @@ QMap<QString, QObject*>& MagicTowerLoader::allPresets()
 
 void MagicTowerLoader::onMapChanged(QString mapName, QString layerName, const int x, const int y, QString presetName)
 {
-	qDebug() << "This is called";
+	//TODO this is a temporary workaround.
+	if(presetName == "@null")
+	{
+		scene->setObjectAt(mapName, layerName, x, y, NULL);
+		return;
+	}
+	else if(presetName == "ground")
+	{
+		SLGCGameUnit* obj = new SLGCGameUnit();
+		obj->setPixmap("ground");
+		obj->presetName = "ground";
+		scene->setObjectAt(mapName, layerName, x, y,obj);
+		return;
+	}
+	else if(presetName == "wall_brown")
+	{
+		SLGCGameUnit* obj = obj = new MagicTowerPassiveObject();
+		obj->setPixmap("wall_brown");
+		obj->presetName = "wall_brown";
+		scene->setObjectAt(mapName,layerName, x, y,obj);
+		return;
+	}
 	MagicTowerPassiveObject* obj = this->getPreset<MagicTowerPassiveObject>(presetName);
 	if(obj!=NULL)
 	scene->setObjectAt(mapName, layerName, x, y, obj->clone());
