@@ -25,10 +25,6 @@ protected:
      * @brief parentWidget，MagicTowerScene创建时为自己创建的用于呈现自己的QGraphicsView对象
      */
     QGraphicsView* parentWidget;
-    /**
-     * @brief maps关联数组存储了魔塔中所有的地图（每一层是一张地图）
-     */
-	//QMap<QString, SLGCGameMap*> game->maps;
 
     /**
      * @brief activeCharacter表示魔塔当前的“活动”（受操纵的）人物。

@@ -10,6 +10,7 @@ class SLGMEditorWidget;
 class SLGMEditorScene;
 class QHBoxLayout;
 class SLGMObjectSelectorWidget;
+class SLGMMapTreeEditor;
 
 class SLGMMainWindow : public QMainWindow
 {
@@ -25,6 +26,7 @@ protected:
 	QFileDialog fileDialog;
 	QHBoxLayout* mainLayout;
 	SLGMObjectSelectorWidget* objectSelectorWidget;
+	SLGMMapTreeEditor* widgetMapTreeEditor;
 signals:
 
 public slots:

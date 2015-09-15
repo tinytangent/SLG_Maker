@@ -3,7 +3,9 @@
 
 #include "SLGMMainWindow.h"
 #include "SLGMEditorWidget.h"
+#include "SLGMEditorScene.h"
 #include "SLGMObjectSelectorWidget.h"
+#include "SLGMMapTreeEditor.h"
 
 SLGMMainWindow::SLGMMainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -15,8 +17,10 @@ SLGMMainWindow::SLGMMainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(ui.actionClose,SIGNAL(triggered()),this,SLOT(onActionClose()));
 	mainLayout = new QHBoxLayout();
 	editorWidget = new SLGMEditorWidget();
-	mainLayout->addWidget(editorWidget);
+	widgetMapTreeEditor = new SLGMMapTreeEditor(this->getEditorScene()->game, this);
 	objectSelectorWidget = new SLGMObjectSelectorWidget(this);
+	mainLayout->addWidget(widgetMapTreeEditor);
+	mainLayout->addWidget(editorWidget);
 	mainLayout->addWidget(objectSelectorWidget);
 	QWidget* temp = new QWidget();
 	temp->setLayout(mainLayout);
@@ -52,6 +56,7 @@ void SLGMMainWindow::onActionOpen()
 		}
 	}
 	objectSelectorWidget->updateObjectList();
+	widgetMapTreeEditor->loadGameHierarchy();
 }
 
 void SLGMMainWindow::onActionClose()

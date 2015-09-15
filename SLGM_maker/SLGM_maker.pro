@@ -30,7 +30,8 @@ SOURCES += \
     SLGMMainWindow.cpp \
     SLGMEditorScene.cpp \
     SLGMEditorWidget.cpp \
-	SLGMObjectSelectorWidget.cpp
+	SLGMObjectSelectorWidget.cpp \
+    SLGMMapTreeEditor.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -48,9 +49,11 @@ HEADERS += \
     SLGMMainWindow.h \
     SLGMEditorScene.h \
     SLGMEditorWidget.h \
-	SLGMObjectSelectorWidget.h
+	SLGMObjectSelectorWidget.h \
+    SLGMMapTreeEditor.h
 
 FORMS += \
     slgmmainwindow.ui \
     slgmgameeditorwidget.ui \
-    slgmobjectselectorwidget.ui
+    slgmobjectselectorwidget.ui \
+    SLGMMapTreeEditor.ui
