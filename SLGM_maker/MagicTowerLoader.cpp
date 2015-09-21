@@ -288,6 +288,12 @@ void MagicTowerLoader::unloadGame()
 	SLGCResourceManager::release();
 }
 
+bool MagicTowerLoader::overwriteGame()
+{
+	scene->game->saveMap(gamePath + "/map.xml");
+	return true;
+}
+
 bool MagicTowerLoader::saveGame(const QString& directoryName, const QString& saveName)
 {
     QFile mapFile(directoryName + "/" + saveName + ".mtsavedmap.ini");

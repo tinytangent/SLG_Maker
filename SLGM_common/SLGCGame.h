@@ -8,6 +8,9 @@ class SLGCGameUnit;
 class SLGCGameMap;
 class SLGCGameLoader;
 class QXmlStreamReader;
+class QVariant;
+
+typedef QMap<QString, QVariant> SLGCDict;
 
 /**
  * @brief The SLGCGame class store complete information used to describe a game
@@ -40,7 +43,7 @@ public:
 	 * @brief allMaps function can be used to get all existing maps in the game.
 	 * @return The list of all existing maps in the game.
 	 */
-	QList<QString> allMaps();
+	QList<QString> allMaps() const;
 
 	/**
 	 * @brief allLayers function can be used to get all existing layers in a specific map.
@@ -70,6 +73,7 @@ public:
 	SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
 	SLGCGameUnit* setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release = true);
 	SLGCGameUnit* getObjectAt(const QString& map, const QString& layer, int x, int y);
+	int getLayerZOrder(const QString &mapName, const QString &layerName);
 protected:
 	//QMap<QString, SLGCGameObject*> objectPresets;
 	QMap<QString, SLGCGameUnit*> unitPresets;

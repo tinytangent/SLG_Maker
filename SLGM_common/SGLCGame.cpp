@@ -32,7 +32,7 @@ SLGCGameMap* SLGCGame::getMap(const QString& name)
 	return maps[name];
 }
 
-QList<QString> SLGCGame::allMaps()
+QList<QString> SLGCGame::allMaps() const
 {
 	return maps.keys();
 }
@@ -60,6 +60,11 @@ SLGCGameUnit* SLGCGame::getObjectAt(const QString& map, const QString& layer, in
 {
 	Q_ASSERT(x>=0&&y>=0&&x<getMap(map)->width&&y<getMap(map)->height);
 	return getMap(map)->getObjectAt(layer,x,y);
+}
+
+int SLGCGame::getLayerZOrder(const QString &mapName, const QString &layerName)
+{
+	return maps[mapName]->layerZOrders[layerName];
 }
 
 bool SLGCGame::addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset)
@@ -108,7 +113,8 @@ bool SLGCGame::loadMap(const QString& fileName)
 
 bool SLGCGame::saveMap(const QString& fileName)
 {
-	return false;
+	loader->saveMapFile(fileName);
+	return true;
 }
 
 bool SLGCGame::addLayer(const QString& map, const QString& name, int zOrder)
