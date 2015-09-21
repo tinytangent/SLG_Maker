@@ -1,5 +1,6 @@
 #include "SLGCGame.h"
 #include "SLGMMapTreeEditor.h"
+#include "SLGMDlgAddMap.h"
 #include "ui_SLGMMapTreeEditor.h"
 
 SLGMMapTreeEditor::SLGMMapTreeEditor(SLGCGame *_game, QWidget *parent) :
@@ -8,6 +9,8 @@ SLGMMapTreeEditor::SLGMMapTreeEditor(SLGCGame *_game, QWidget *parent) :
 	ui(new Ui::SLGMMapTreeEditor)
 {
 	ui->setupUi(this);
+	dlgAddMap = new SLGMDlgAddMap(this);
+	connect(ui->buttonAddMap,SIGNAL(clicked(bool)),this,SLOT(onAddMap()));
 }
 
 SLGMMapTreeEditor::~SLGMMapTreeEditor()
@@ -31,4 +34,14 @@ void SLGMMapTreeEditor::loadGameHierarchy()
 
 		ui->treeWidget->addTopLevelItem(mapItem);
 	}
+}
+
+void SLGMMapTreeEditor::onAddMap()
+{
+	dlgAddMap->exec();
+}
+
+void SLGMMapTreeEditor::onAddLayer()
+{
+
 }

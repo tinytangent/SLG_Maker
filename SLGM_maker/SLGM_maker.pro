@@ -31,7 +31,8 @@ SOURCES += \
     SLGMEditorScene.cpp \
     SLGMEditorWidget.cpp \
 	SLGMObjectSelectorWidget.cpp \
-    SLGMMapTreeEditor.cpp
+    SLGMMapTreeEditor.cpp \
+    SLGMDlgAddMap.cpp
 
 HEADERS += \
     MainWindow.h \
@@ -50,10 +51,12 @@ HEADERS += \
     SLGMEditorScene.h \
     SLGMEditorWidget.h \
 	SLGMObjectSelectorWidget.h \
-    SLGMMapTreeEditor.h
+    SLGMMapTreeEditor.h \
+    SLGMDlgAddMap.h
 
 FORMS += \
     slgmmainwindow.ui \
     slgmgameeditorwidget.ui \
     slgmobjectselectorwidget.ui \
-    SLGMMapTreeEditor.ui
+    SLGMMapTreeEditor.ui \
+    SLGMDlgAddMap.ui
