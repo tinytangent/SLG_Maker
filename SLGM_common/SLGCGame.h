@@ -73,6 +73,7 @@ public:
 	SLGCGameUnit* setObjectAt(const QString& map, const QString& layer, int x, int y, SLGCGameUnit* obj, bool release = true);
 	SLGCGameUnit* setObjectAt(SLGCGameUnit* oldObject, SLGCGameUnit* newObject, bool release = true);
 	SLGCGameUnit* getObjectAt(const QString& map, const QString& layer, int x, int y);
+	int getLayerZOrder(const QString &mapName, const QString &layerName);
 protected:
 	//QMap<QString, SLGCGameObject*> objectPresets;
 	QMap<QString, SLGCGameUnit*> unitPresets;

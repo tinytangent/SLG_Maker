@@ -2,6 +2,8 @@
 #include <QHBoxLayout>
 
 #include "SLGCGame.h"
+#include "SLGCGameMap.h"
+#include "SLGCGameUnit.h"
 #include "SLGMMainWindow.h"
 #include "SLGMEditorWidget.h"
 #include "SLGMEditorScene.h"
@@ -78,5 +80,20 @@ void SLGMMainWindow::onActionSaveAs()
 void SLGMMainWindow::perfromMapClone(const QString &newMapName, const QString &oldMapName)
 {
 	SLGCGame* game = this->editorWidget->gameScene->game;
-	game->addMap(newMapName,13,13);
+	SLGCGameMap* oldMap = game->getMap(oldMapName);
+	int width = oldMap->width;
+	int height = oldMap->height;
+	game->addMap(newMapName, width, height);
+	foreach(const QString& layer, oldMap->layers.keys())
+	{
+		game->addLayer(newMapName, layer, game->getLayerZOrder(oldMapName, layer));
+		for(int i=0;i<width;i++)
+		{
+			for(int j=0;j<height;j++)
+			{
+				SLGCGameUnit* oldUnit = game->getObjectAt(oldMapName, layer, i, j);
+				game->setObjectAt(newMapName, layer, i, j, oldUnit->clone());
+			}
+		}
+	}
 }

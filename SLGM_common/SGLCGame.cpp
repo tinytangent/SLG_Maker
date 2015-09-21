@@ -62,6 +62,11 @@ SLGCGameUnit* SLGCGame::getObjectAt(const QString& map, const QString& layer, in
 	return getMap(map)->getObjectAt(layer,x,y);
 }
 
+int SLGCGame::getLayerZOrder(const QString &mapName, const QString &layerName)
+{
+	return maps[mapName]->layerZOrders[layerName];
+}
+
 bool SLGCGame::addUnitPreset(const QString& presetName, SLGCGameUnit* unitPreset)
 {
 	//TODO not implemented
