@@ -1,6 +1,7 @@
 #include <QMessageBox>
 #include <QHBoxLayout>
 
+#include "SLGCGame.h"
 #include "SLGMMainWindow.h"
 #include "SLGMEditorWidget.h"
 #include "SLGMEditorScene.h"
@@ -66,10 +67,16 @@ void SLGMMainWindow::onActionClose()
 
 void SLGMMainWindow::onActionSave()
 {
-
+	editorWidget->loader->overwriteGame();
 }
 
 void SLGMMainWindow::onActionSaveAs()
 {
 
+}
+
+void SLGMMainWindow::perfromMapClone(const QString &newMapName, const QString &oldMapName)
+{
+	SLGCGame* game = this->editorWidget->gameScene->game;
+	game->addMap(newMapName,13,13);
 }

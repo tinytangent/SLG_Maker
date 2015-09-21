@@ -35,6 +35,7 @@ public slots:
 	void onActionClose();
 	void onActionSave();
 	void onActionSaveAs();
+	void perfromMapClone(const QString& newMapName, const QString& oldMapName);
 };
 
 #endif // SLGMMAINWINDOW_H

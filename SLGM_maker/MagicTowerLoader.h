@@ -50,6 +50,14 @@ public:
      */
     void unloadGame();
 
+
+	/**
+	 * @brief overwriteGame will not create a differential record of what is changed.
+	 * Instead, it will over write, used by editor.
+	 * @return If success.
+	 */
+	bool overwriteGame();
+
     /**
      * @brief saveGame 保存游戏的算法
      * @param directoryName 保存游戏的路径名
