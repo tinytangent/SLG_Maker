@@ -32,7 +32,7 @@ SLGCGameMap* SLGCGame::getMap(const QString& name)
 	return maps[name];
 }
 
-QList<QString> SLGCGame::allMaps()
+QList<QString> SLGCGame::allMaps() const
 {
 	return maps.keys();
 }

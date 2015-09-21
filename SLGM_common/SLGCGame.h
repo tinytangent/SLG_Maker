@@ -8,6 +8,9 @@ class SLGCGameUnit;
 class SLGCGameMap;
 class SLGCGameLoader;
 class QXmlStreamReader;
+class QVariant;
+
+typedef QMap<QString, QVariant> SLGCDict;
 
 /**
  * @brief The SLGCGame class store complete information used to describe a game
@@ -40,7 +43,7 @@ public:
 	 * @brief allMaps function can be used to get all existing maps in the game.
 	 * @return The list of all existing maps in the game.
 	 */
-	QList<QString> allMaps();
+	QList<QString> allMaps() const;
 
 	/**
 	 * @brief allLayers function can be used to get all existing layers in a specific map.
